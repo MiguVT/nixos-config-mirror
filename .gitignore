@@ -1,0 +1,16 @@
+# Nix build artifacts (result is a symlink to the last build)
+result
+result-*
+
+# Local, machine-specific overrides (keep out of VCS)
+local/
+*.local.nix
+
+# Secrets (agenix / sops-nags / nix-secrets)
+secrets/
+
+# Editor and OS cruft
+*~
+.#*
+.*.swp
+.DS_Store
