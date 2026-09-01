@@ -33,8 +33,11 @@
     wayland.enable = true;
   };
 
-  # Symlinks user's KWin layout to SDDM for consistent login screen display config
+  # Copy (not symlink) the user's KWin layout into sddm's config dir at boot so
+  # the greeter matches the session; a symlink is unreadable since /home/miguvt is 0700.
   systemd.tmpfiles.rules = [
-    "L+ /var/lib/sddm/.config/kwinoutputconfig.json - sddm sddm - /home/miguvt/.config/kwinoutputconfig.json"
+    "d /var/lib/sddm/.config 0750 sddm sddm -"
+    "R! /var/lib/sddm/.config/kwinoutputconfig.json"
+    "C /var/lib/sddm/.config/kwinoutputconfig.json 0644 sddm sddm - /home/miguvt/.config/kwinoutputconfig.json"
   ];
 }
