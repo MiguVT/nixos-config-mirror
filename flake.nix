@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Bleeding-edge XR/AR/VR packages (Monado, xrizer, wayvr, lovr-playspace, proton-rtsp-bin, ...)
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     millennium = {
@@ -32,6 +35,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-xr,
       nix-flatpak,
       home-manager,
       vicinae,
@@ -47,6 +51,7 @@
         modules = [
           ./configuration.nix
           nix-flatpak.nixosModules.nix-flatpak
+          nixpkgs-xr.nixosModules.nixpkgs-xr
           {
             nixpkgs.overlays = [ millennium.overlays.default ];
           }
