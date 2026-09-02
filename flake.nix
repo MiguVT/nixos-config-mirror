@@ -59,6 +59,7 @@
             home-manager.users.miguvt = {
               imports = [
                 vicinae.homeManagerModules.default
+                ./modules/home/vr.nix
               ];
               home.stateVersion = "24.11";
             };

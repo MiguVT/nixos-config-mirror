@@ -17,6 +17,7 @@
     ./modules/gaming/minecraft.nix
     ./modules/gaming/index.nix
     ./modules/gaming/roblox.nix
+    ./modules/gaming/vr.nix
     ./modules/system/nix.nix
     ./modules/system/zram.nix
     ./modules/system/locale.nix
