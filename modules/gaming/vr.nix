@@ -29,16 +29,4 @@
 
   # TODO: re-enable once proton-rtsp-bin is fixed for the new proton-ge-bin overrideAttrs interface
   # programs.steam.extraCompatPackages = [ pkgs.proton-rtsp-bin ];
-
-  programs.steam = {
-    enable = true;
-    package = pkgs.steam.override {
-      extraProfile = ''
-        # Allows Monado/WiVRn to be used
-        export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
-        # Fixes timezones on VRChat if used
-        unset TZ
-      '';
-    };
-  };
 }

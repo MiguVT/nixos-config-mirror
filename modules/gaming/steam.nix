@@ -3,7 +3,14 @@
 {
   programs.steam = {
     enable = true;
-    package = pkgs.millennium-steam;
+    package = pkgs.millennium-steam.override {
+      extraProfile = ''
+        # Allows Monado/WiVRn to be used
+        export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
+        # Fixes timezones on VRChat if used
+        unset TZ
+      '';
+    };
 
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
