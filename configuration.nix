@@ -37,6 +37,7 @@
     ./modules/apps/flatpak.nix
     ./modules/apps/ai.nix
     ./modules/apps/streaming.nix
+    ./modules/apps/music.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
