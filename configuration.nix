@@ -13,6 +13,7 @@
     ./modules/hardware/nvidia.nix
     ./modules/hardware/bluetooth.nix
     ./modules/hardware/printer.nix
+    ./modules/hardware/openrgb.nix
     ./modules/gaming/steam.nix
     ./modules/gaming/minecraft.nix
     ./modules/gaming/index.nix
