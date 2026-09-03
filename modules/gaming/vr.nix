@@ -15,6 +15,9 @@
     # NVIDIA: compositor work is not scheduled on time without these
     XRT_COMPOSITOR_USE_PRESENT_WAIT = "1";
     U_PACING_COMP_TIME_FRACTION_PERCENT = "90";
+
+    # Floor on compositor pacing time to reduce headset-view stuttering
+    U_PACING_COMP_MIN_TIME_MS = "5";
   };
 
   users.users.miguvt.packages = [
