@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs.obs-studio = {
     enable = true;
-
-    # Configures v4l2loopback + polkit for virtual camera
     enableVirtualCamera = true;
 
     package = pkgs.obs-studio.override {
@@ -19,10 +17,19 @@
     ];
   };
 
+  # Headless Stream Deck server (web UI on :8088)
+  systemd.user.services.bitfocus-companion = {
+    description = "Bitfocus Companion Stream Deck server";
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      ExecStart = lib.getExe pkgs.bitfocus-companion;
+      Restart = "on-failure";
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     v4l-utils
     ffmpeg
-    bitfocus-companion
   ];
 
   # Grant the logged-in desktop user access to Bitfocus Stream Deck (USB + HID)
