@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.obs-studio = {
@@ -15,16 +15,6 @@
       obs-vkcapture
       obs-gstreamer
     ];
-  };
-
-  # Headless Stream Deck server (web UI on :8088)
-  systemd.user.services.bitfocus-companion = {
-    description = "Bitfocus Companion Stream Deck server";
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      ExecStart = lib.getExe pkgs.bitfocus-companion;
-      Restart = "on-failure";
-    };
   };
 
   environment.systemPackages = with pkgs; [
