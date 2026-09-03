@@ -21,6 +21,7 @@
     ./modules/gaming/vr.nix
     ./modules/system/nix.nix
     ./modules/system/zram.nix
+    ./modules/system/scx.nix
     ./modules/system/locale.nix
     ./modules/system/audio.nix
     ./modules/system/maintenance.nix
