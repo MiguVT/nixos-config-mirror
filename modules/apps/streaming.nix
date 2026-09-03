@@ -22,9 +22,12 @@
     ffmpeg
   ];
 
-  # Grant the logged-in desktop user access to Bitfocus Stream Deck (USB + HID)
+  # Grant the logged-in desktop user access to Elgato Stream Deck (USB + HID)
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", TAG+="uaccess"
     KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", TAG+="uaccess"
   '';
+
+  # OpenDeck — Stream Deck controller (Elgato plugin ecosystem)
+  services.flatpak.packages = [ "me.amankhanna.opendeck" ];
 }
