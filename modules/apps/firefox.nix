@@ -31,6 +31,14 @@ in
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi";
             installation_mode = "force_installed";
           };
+          "{76ef94a4-e3d0-4c6f-961a-d38a429a332b}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ttv-lol-pro/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          "frankerfacez@frankerfacez.com" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/frankerfacez/latest.xpi";
+            installation_mode = "force_installed";
+          };
         };
 
         Preferences = {
