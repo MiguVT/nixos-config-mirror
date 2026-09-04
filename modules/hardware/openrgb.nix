@@ -3,6 +3,8 @@
 {
   hardware.i2c.enable = true;
 
+  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
+
   boot.kernelModules = [
     "i2c-dev"
     # Super I/O: motherboard RGB lives behind SMBus (NCT679x)
