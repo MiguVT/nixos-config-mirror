@@ -41,6 +41,7 @@
     ./modules/apps/streaming.nix
     ./modules/apps/music.nix
     ./modules/apps/office.nix
+    ./modules/apps/alcom.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
@@ -56,6 +57,8 @@
       "steam-original"
       "steam-run"
       "steam-unwrapped"
+      "unityhub"
+      "corefonts"
     ]
     # Catches cuda, cudnn, libcublas, libcufft, etc.
     || builtins.match ".*(cuda|cudnn|libcu).*" name != null;
