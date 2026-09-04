@@ -40,6 +40,7 @@
     ./modules/apps/ai.nix
     ./modules/apps/streaming.nix
     ./modules/apps/music.nix
+    ./modules/apps/office.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
