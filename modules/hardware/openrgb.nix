@@ -1,26 +1,19 @@
 { pkgs, ... }:
 
 {
+  hardware.i2c.enable = true;
+
   boot.kernelModules = [
     "i2c-dev"
     # Super I/O: motherboard RGB lives behind SMBus (NCT679x)
     "nct6775"
+    "i2c-piix4"
   ];
 
-  users.groups.i2c = {
-    gid = 1010;
-    members = [ "miguvt" ];
-  };
+  users.users.miguvt.extraGroups = [ "i2c" ];
 
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
-  };
-
-  home-manager.users.miguvt = { pkgs, ... }: {
-    programs.fish.functions."no-rgb" = {
-      description = "Turn off all OpenRGB devices";
-      body = "openrgb --mode static --color 000000";
-    };
   };
 }
