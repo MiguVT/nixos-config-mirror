@@ -15,6 +15,7 @@
     ./modules/hardware/printer.nix
     ./modules/hardware/openrgb.nix
     ./modules/gaming/gale.nix
+    ./modules/gaming/amethyst.nix
     ./modules/gaming/steam.nix
     ./modules/gaming/minecraft.nix
     ./modules/gaming/index.nix
