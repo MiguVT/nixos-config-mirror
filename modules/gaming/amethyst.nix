@@ -1,65 +1,15 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, ... }:
 
 let
-  amethystModManager =
-    pkgs.python3Packages.buildPythonApplication (finalAttrs: {
-      pname = "Amethyst-Mod-Manager";
-      version = "1.3.11";
-      format = "other";
-      dontBuild = true;
+  appImage = pkgs.fetchurl {
+    url = "https://github.com/ChrisDKN/Amethyst-Mod-Manager/releases/download/v2.4.1/AmethystModManager-2.4.1-x86_64.AppImage";
+    sha256 = "9f235e028c3f89081f55d31d6fac29932ef79b9514b344a86f850459aef6a05c";
+  };
 
-      src = pkgs.fetchFromGitHub {
-        owner = "ChrisDKN";
-        repo = "Amethyst-Mod-Manager";
-        rev = "v1.3.11";
-        sha256 = "sha256-WqAYDCnzlpEWS+SXIpEGFw23yak7H0zgW4xqFAknRRQ=";
-      };
-
-      dependencies = with pkgs.python3Packages; [
-        customtkinter
-        py7zr
-        libarchive-c
-        pillow
-        lz4
-        zstandard
-        requests
-        websocket-client
-        keyring
-        jeepney
-        importlib-metadata
-        backports-tarfile
-        msgpack
-        bsdiff4
-      ];
-
-      installPhase = ''
-        runHook preInstall
-        mkdir -p $out/bin
-        cp $src/src/gui.py $out/bin/Amethyst-Mod-Manager
-        # gui.py ships without a shebang or exec bit; add both so the
-        # wrapPythonPrograms hook in postFixUp wraps it into a runnable command.
-        sed -i '1i #!/usr/bin/env python3' $out/bin/Amethyst-Mod-Manager
-        chmod +x $out/bin/Amethyst-Mod-Manager
-        runHook postInstall
-      '';
-
-      postFixUp = ''
-        wrapPythonPrograms
-      '';
-
-      meta = {
-        description = "A Linux native mod manager for a variety of games";
-        homepage = "https://github.com/ChrisDKN/Amethyst-Mod-Manager";
-        downloadPage = "https://github.com/ChrisDKN/Amethyst-Mod-Manager/releases";
-        license = lib.licenses.gpl3;
-        platforms = [ "x86_64-linux" ];
-      };
-    });
+  amethyst = pkgs.runCommand "amethyst-mod-manager" { } ''
+    install -Dm755 ${appImage} $out/bin/AmethystModManager
+  '';
 in
 {
-  environment.systemPackages = [ amethystModManager ];
+  users.users.miguvt.packages = [ amethyst ];
 }
