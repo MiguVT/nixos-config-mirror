@@ -20,6 +20,8 @@
       pkgs.proton-ge-bin
       pkgs.dwproton-bin
     ];
+
+    protontricks.enable = true;
   };
 
   programs.gamemode.enable = true;
