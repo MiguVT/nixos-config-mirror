@@ -2,8 +2,8 @@
 
 let
   appImage = pkgs.fetchurl {
-    url = "https://github.com/ChrisDKN/Amethyst-Mod-Manager/releases/download/v2.4.1/AmethystModManager-2.4.1-x86_64.AppImage";
-    sha256 = "9f235e028c3f89081f55d31d6fac29932ef79b9514b344a86f850459aef6a05c";
+    url = "https://github.com/ChrisDKN/Amethyst-Mod-Manager/releases/download/v2.4.2/AmethystModManager-2.4.2-x86_64.AppImage";
+    sha256 = "acca19a3e6ad19fd50be087ddce379140af91e97153ff076de7d4424fdce7876";
   };
 
   # fetchurl yields a read-only (0444) file; install an executable copy.
