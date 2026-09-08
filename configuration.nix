@@ -29,6 +29,7 @@
     ./modules/system/maintenance.nix
     ./modules/system/display.nix
     ./modules/system/mullvad.nix
+    ./modules/system/firewall.nix
     ./modules/apps/firefox.nix
     ./modules/apps/terminal.nix
     ./modules/apps/cli.nix
