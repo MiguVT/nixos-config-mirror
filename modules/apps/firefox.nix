@@ -18,10 +18,6 @@ in
         DisableFirefoxStudies = true;
         DisablePocket = true;
 
-        # Route the default search engine to our self-hosted SearXNG instance
-        DefaultSearchEngine = "DuckDuckGo";
-        DefaultSearchEngineURL = "https://searxng.miguvt.com/search?q={searchTerms}";
-
         ExtensionSettings = {
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
@@ -60,6 +56,22 @@ in
         id = 0;
         name = "miguvt";
         isDefault = true;
+
+        search = {
+          force = true;
+          default = "searxng";
+          engines.searxng = {
+            name = "SearXNG";
+            urls = [
+              {
+                template = "https://searxng.miguvt.com/search";
+                params = [ { name = "q"; value = "{searchTerms}"; } ];
+              }
+            ];
+            icon = "https://searxng.miguvt.com/static/favicon.svg";
+            definedAliases = [ "@sx" ];
+          };
+        };
 
         extraConfig = ''
           ${builtins.readFile betterfox}
