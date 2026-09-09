@@ -18,6 +18,10 @@ in
         DisableFirefoxStudies = true;
         DisablePocket = true;
 
+        # Route the default search engine to our self-hosted SearXNG instance
+        DefaultSearchEngine = "DuckDuckGo";
+        DefaultSearchEngineURL = "https://searxng.miguvt.com/search?q={searchTerms}";
+
         ExtensionSettings = {
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
