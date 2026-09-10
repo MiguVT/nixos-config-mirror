@@ -26,4 +26,12 @@
 
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
+
+  # SRMP spams its Logs dir without ever clearing/rotating. Overlay it with a
+  # small tmpfs so the endless debug/error logs never hit disk or accumulate.
+  fileSystems."/mnt/data/Games/Steam/steamapps/common/Slime Rancher/SRMP/Logs" = {
+    device = "tmpfs";
+    fsType = "tmpfs";
+    options = [ "size=10M" "uid=1000" "gid=100" "mode=0755" ];
+  };
 }
