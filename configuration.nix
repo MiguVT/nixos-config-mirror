@@ -41,7 +41,7 @@
     ./modules/apps/flatpak.nix
     ./modules/apps/ai.nix
     ./modules/apps/streaming.nix
-    ./modules/apps/music.nix
+    ./modules/apps/media.nix
     ./modules/apps/office.nix
     ./modules/apps/thunderbird.nix
     ./modules/apps/graphics.nix
