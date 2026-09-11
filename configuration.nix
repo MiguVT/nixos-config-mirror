@@ -46,6 +46,7 @@
     ./modules/apps/thunderbird.nix
     ./modules/apps/graphics.nix
     ./modules/apps/alcom.nix
+    ./modules/apps/isoimagewriter.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
