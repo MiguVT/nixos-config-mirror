@@ -22,6 +22,8 @@
     ffmpeg
   ];
 
+  home-manager.users.miguvt.home.packages = [ pkgs.losslesscut ];
+
   # Grant the logged-in desktop user access to Elgato Stream Deck (USB + HID)
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", TAG+="uaccess"
