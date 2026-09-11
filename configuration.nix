@@ -48,6 +48,7 @@
     ./modules/apps/office.nix
     ./modules/apps/thunderbird.nix
     ./modules/apps/graphics.nix
+    ./modules/apps/maps.nix
     ./modules/apps/alcom.nix
     ./modules/apps/isoimagewriter.nix
   ];
