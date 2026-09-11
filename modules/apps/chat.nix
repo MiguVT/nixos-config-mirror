@@ -5,6 +5,7 @@
     home.packages = with pkgs; [
       vesktop
       ayugram-desktop
+      whatsie
     ];
   };
 }
