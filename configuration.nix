@@ -16,6 +16,7 @@
     ./modules/hardware/razer.nix
     ./modules/gaming/gale.nix
     ./modules/gaming/amethyst.nix
+    ./modules/gaming/lutris.nix
     ./modules/gaming/steam.nix
     ./modules/gaming/minecraft.nix
     ./modules/gaming/index.nix
