@@ -53,6 +53,7 @@
     ./modules/apps/maps.nix
     ./modules/apps/alcom.nix
     ./modules/apps/isoimagewriter.nix
+    ./modules/apps/archive.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
