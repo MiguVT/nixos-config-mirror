@@ -14,6 +14,7 @@
     ./modules/hardware/printer.nix
     ./modules/hardware/openrgb.nix
     ./modules/hardware/razer.nix
+    ./modules/hardware/new-lg4ff.nix
     ./modules/gaming/gale.nix
     ./modules/gaming/amethyst.nix
     ./modules/gaming/lutris.nix
