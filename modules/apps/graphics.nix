@@ -28,7 +28,6 @@ in
   home-manager.users.miguvt = {
     home.packages = with pkgs; [
       gimp-with-plugins
-      upscayl
     ];
 
     # PhotoGIMP 3.1 theme profile (Diolinux/PhotoGIMP).
