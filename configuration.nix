@@ -14,7 +14,7 @@
     ./modules/hardware/printer.nix
     ./modules/hardware/openrgb.nix
     ./modules/hardware/razer.nix
-    ./modules/hardware/new-lg4ff.nix
+    ./modules/hardware/lg4ff.nix
     ./modules/gaming/gale.nix
     ./modules/gaming/amethyst.nix
     ./modules/gaming/lutris.nix
@@ -24,6 +24,7 @@
     ./modules/gaming/minecraft.nix
     ./modules/gaming/index.nix
     ./modules/gaming/roblox.nix
+    ./modules/gaming/hydralauncher.nix
     ./modules/gaming/vr.nix
     ./modules/system/nix.nix
     ./modules/system/zram.nix
@@ -56,7 +57,7 @@
     ./modules/apps/alcom.nix
     ./modules/apps/isoimagewriter.nix
     ./modules/apps/archive.nix
-    ./modules/apps/scrcpy.nix
+    ./modules/apps/phone.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =

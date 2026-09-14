@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 
 {
-  environment.systemPackages = [
+  users.users.miguvt.packages = [
     inputs.freesmlauncher.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     (pkgs.prismlauncher.override {
@@ -11,7 +11,9 @@
         pkgs.jdk8 # MC 1.16.5 and older
       ];
     })
+  ];
 
+  environment.systemPackages = [
     # Auto-detected by FreesmLauncher
     pkgs.jdk21
     pkgs.jdk17

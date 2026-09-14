@@ -2,6 +2,6 @@
 
 {
   users.users.miguvt.packages = [
-    pkgs.gale
+    pkgs.hydralauncher
   ];
 }
