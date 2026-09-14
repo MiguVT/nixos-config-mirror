@@ -1,0 +1,24 @@
+name: Mirror
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone source (bare)
+        run: git clone --bare https://git.miguvt.com/MiguVT/nixos-config.git /tmp/source
+
+      - name: Push mirror
+        working-directory: /tmp/source
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global url."https://x-access-token:${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
+          git push --mirror https://github.com/MiguVT/nixos-config-mirror.git
