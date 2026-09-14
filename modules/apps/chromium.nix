@@ -2,8 +2,8 @@
 
 {
   home-manager.users.miguvt = {
-    programs.chromium.enable = {
-      enabe = true;
+    programs.chromium = {
+      enable = true;
       package = pkgs.ungoogled-chromium;
     };
   };
