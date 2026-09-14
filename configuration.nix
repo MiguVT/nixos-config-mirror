@@ -56,6 +56,7 @@
     ./modules/apps/alcom.nix
     ./modules/apps/isoimagewriter.nix
     ./modules/apps/archive.nix
+    ./modules/apps/scrcpy.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
