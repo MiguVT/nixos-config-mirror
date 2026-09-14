@@ -35,6 +35,7 @@
     ./modules/system/mullvad.nix
     ./modules/system/firewall.nix
     ./modules/apps/firefox.nix
+    ./modules/apps/chromium.nix
     ./modules/apps/terminal.nix
     ./modules/apps/cli.nix
     ./modules/apps/git.nix
