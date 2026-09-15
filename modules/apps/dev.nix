@@ -30,6 +30,8 @@
     jq
     gnumake
     gcc
+    mono
+    msbuild
   ];
 
   home-manager.users.miguvt = { pkgs, ... }: {
