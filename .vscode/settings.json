@@ -1,5 +1,14 @@
 {
   "nixEnvSelector.nixFile": "${workspaceFolder}/flake.nix",
   "nixEnvSelector.useFlakes": true,
-  "nixEnvSelector.flakeShell": "default"
+  "nixEnvSelector.flakeShell": "default",
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nil",
+  "nix.serverSettings": {
+    "nil": {
+      "formatting": {
+        "command": ["nixfmt"]
+      }
+    }
+  }
 }
