@@ -9,11 +9,4 @@
     # '0' tells make/ninja/cargo to utilize all 32 logical threads per job
     cores = 0;
   };
-
-  # Compressed RAM swap to guarantee stability during heavy parallel builds
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd";
-    memoryPercent = 50;
-  };
 }
