@@ -1,18 +1,15 @@
-{ pkgs, inputs, ... }:
+{ inputs, pkgs, ... }:
 
 let
   pkgs-stable = import inputs.nixpkgs-stable {
     system = pkgs.stdenv.hostPlatform.system;
-    config = {
-      allowUnfree = true;
-      cudaSupport = true;
-    };
+    config.allowUnfree = false;
   };
 in
 {
   environment.systemPackages = [
     (pkgs.llama-cpp.override { cudaSupport = true; })
-    pkgs-stable.opencode # change to unstable when this https://github.com/nodejs/node/pull/66104 get merged
+    pkgs-stable.opencode
   ];
 
   environment.sessionVariables = {
