@@ -25,7 +25,7 @@
 
       # Maps workflow 'runs-on' values to container images
       labels = [
-        "ubuntu-latest:docker://node:22-bookworm"
+        "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest"
         "nix-latest:docker://nixos/nix:latest"
       ];
     };
