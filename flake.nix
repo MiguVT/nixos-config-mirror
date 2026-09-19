@@ -5,23 +5,33 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Bleeding-edge XR/AR/VR packages (Monado, xrizer, wayvr, lovr-playspace, proton-rtsp-bin, ...)
-    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+    nixpkgs-xr = {
+      url = "github:nix-community/nixpkgs-xr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     millennium = {
       url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vicinae.url = "github:vicinaehq/vicinae";
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     freesmlauncher = {
-      url = "github:FreesmTeam/FreesmLauncher/develop";
+      url = "github:FreesmTeam/FreesmLauncher?ref=develop";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
