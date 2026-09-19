@@ -69,7 +69,14 @@
           nix-flatpak.nixosModules.nix-flatpak
           nixpkgs-xr.nixosModules.nixpkgs-xr
           {
-            nixpkgs.overlays = [ millennium.overlays.default ];
+            nixpkgs.overlays = [
+              millennium.overlays.default
+              (final: prev: {
+                nodejs-slim = prev.nodejs-slim.overrideAttrs (oldAttrs: {
+                  doCheck = false; # This was needed because nodejs-slim failed to build idk why ._.
+                });
+              })
+            ];
           }
 
           home-manager.nixosModules.home-manager
