@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   programs.steam = {
@@ -27,11 +27,24 @@
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
 
+  nixpkgs.overlays = [
+    inputs.millennium.overlays.default
+    (final: prev: {
+      nodejs-slim = prev.nodejs-slim.overrideAttrs (oldAttrs: {
+        doCheck = false; # This was needed because nodejs-slim failed to build idk why ._.
+      });
+    })
+  ];
   # SRMP spams its Logs dir without ever clearing/rotating. Overlay it with a
   # small tmpfs so the endless debug/error logs never hit disk or accumulate.
   fileSystems."/mnt/data/Games/Steam/steamapps/common/Slime Rancher/SRMP/Logs" = {
     device = "tmpfs";
     fsType = "tmpfs";
-    options = [ "size=10M" "uid=1000" "gid=100" "mode=0755" ];
+    options = [
+      "size=10M"
+      "uid=1000"
+      "gid=100"
+      "mode=0755"
+    ];
   };
 }
