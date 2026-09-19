@@ -1,20 +1,19 @@
 { ... }:
 
 {
-  # !!! TARGETED FOR MY CURRENT CPU + RAM (Ryzen 9 5950x 64GB RAM) - IF I CHANGE PC CHANGE THIS !!!
+  # CPU & Build Tuning for Ryzen 9 5950X (16C/32T) + 64GB RAM
   nix.settings = {
-    max-jobs = 1;
-    cores = 12;
+    # 'auto' lets Nix dynamically scale concurrent package builds based on available cores
+    max-jobs = "auto";
+
+    # '0' tells make/ninja/cargo to utilize all 32 logical threads per job
+    cores = 0;
   };
 
-  zramSwap.enable = true;
-
-  # Skip unit tests for nodejs-slim so flaky test failures don't break the build
-  nixpkgs.overlays = [
-    (final: prev: {
-      nodejs-slim = prev.nodejs-slim.overrideAttrs (oldAttrs: {
-        doCheck = false;
-      });
-    })
-  ];
+  # Compressed RAM swap to guarantee stability during heavy parallel builds
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
 }
