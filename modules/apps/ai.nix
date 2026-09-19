@@ -1,9 +1,18 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
+let
+  pkgs-stable = import inputs.nixpkgs-stable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config = {
+      allowUnfree = true;
+      cudaSupport = true;
+    };
+  };
+in
 {
   environment.systemPackages = [
-    (pkgs.stable.llama-cpp.override { cudaSupport = true; })
-    pkgs.stable.opencode
+    (pkgs-stable.llama-cpp.override { cudaSupport = true; })
+    pkgs-stable.opencode
   ];
 
   environment.sessionVariables = {
