@@ -11,7 +11,7 @@ let
 in
 {
   environment.systemPackages = [
-    (pkgs-stable.llama-cpp.override { cudaSupport = true; })
+    (pkgs.llama-cpp.override { cudaSupport = true; })
     pkgs-stable.opencode
   ];
 
