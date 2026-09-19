@@ -3,7 +3,7 @@
 {
   programs.steam = {
     enable = true;
-    package = inputs.millennium.packages.${pkgs.system}.millennium-steam.override {
+    package = inputs.millennium.packages.${pkgs.stdenv.hostPlatform.system}.millennium-steam.override {
       extraProfile = ''
         # Allows Monado/WiVRn to be used
         export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
