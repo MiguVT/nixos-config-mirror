@@ -12,7 +12,7 @@ in
 {
   environment.systemPackages = [
     (pkgs.llama-cpp.override { cudaSupport = true; })
-    pkgs-stable.opencode
+    pkgs-stable.opencode # change to unstable when this https://github.com/nodejs/node/pull/66104 get merged
   ];
 
   environment.sessionVariables = {
