@@ -10,10 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-flatpak = {
-      url = "github:gmodena/nix-flatpak";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     millennium = {
       url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
