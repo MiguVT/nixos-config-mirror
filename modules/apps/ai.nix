@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    (llama-cpp.override { cudaSupport = true; })
-    opencode
+  environment.systemPackages = [
+    (pkgs.stable.llama-cpp.override { cudaSupport = true; })
+    pkgs.stable.opencode
   ];
 
   environment.sessionVariables = {

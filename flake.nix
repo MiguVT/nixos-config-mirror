@@ -3,8 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
-    # Bleeding-edge XR/AR/VR packages (Monado, xrizer, wayvr, lovr-playspace, proton-rtsp-bin, ...)
     nixpkgs-xr = {
       url = "github:nix-community/nixpkgs-xr";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,9 +69,24 @@
         };
 
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+        };
         modules = [
           { nixpkgs.hostPlatform = "x86_64-linux"; }
+
+          # Overlay exposing pkgs.stable globally
+          {
+            nixpkgs.overlays = [
+              (final: _prev: {
+                stable = import inputs.nixpkgs-stable {
+                  system = final.system;
+                  config = final.config;
+                };
+              })
+            ];
+          }
+
           ./configuration.nix
           nix-flatpak.nixosModules.nix-flatpak
           nixpkgs-xr.nixosModules.nixpkgs-xr
