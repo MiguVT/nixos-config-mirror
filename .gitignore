@@ -7,7 +7,13 @@ local/
 *.local.nix
 
 # Secrets (agenix / sops-nags / nix-secrets)
-secrets/
+secrets/*
+# Encrypted sops files are safe to commit
+!secrets/*.yaml
+!secrets/*.yml
+!secrets/*.json
+!secrets/*.ini
+!secrets/*.env
 
 # Editor and OS cruft
 *~

@@ -41,6 +41,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -54,6 +59,7 @@
       vicinae-extensions,
       freesmlauncher,
       millennium,
+      sops-nix,
       ...
     }@inputs:
     {
@@ -65,6 +71,9 @@
           packages = [
             pkgs.nil
             pkgs.nixfmt
+            pkgs.sops
+            pkgs.age
+            pkgs.ssh-to-age
           ];
         };
 
@@ -88,6 +97,7 @@
           }
 
           ./configuration.nix
+          sops-nix.nixosModules.sops
           nix-flatpak.nixosModules.nix-flatpak
           nixpkgs-xr.nixosModules.nixpkgs-xr
 
