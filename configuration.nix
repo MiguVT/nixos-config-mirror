@@ -35,6 +35,8 @@
     ./modules/system/display.nix
     ./modules/system/mullvad.nix
     ./modules/system/firewall.nix
+    ./modules/system/forgejo.nix
+    ./modules/system/building.nix
     ./modules/apps/firefox.nix
     ./modules/apps/chromium.nix
     ./modules/apps/terminal.nix
