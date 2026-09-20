@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   # 1. Container Runtime (Podman)

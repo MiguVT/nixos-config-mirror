@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   # fetchzip strips the top-level "PhotoGIMP-linux" dir (stripRoot),
@@ -9,19 +9,6 @@ let
     sha256 = "6b236130b8d28d84497340c3ffca2a29dd213861cb518068adae3ec6d562fe24";
   };
 
-  iconSizes = [
-    "16x16"
-    "32x32"
-    "48x48"
-    "64x64"
-    "128x128"
-    "512x512"
-  ];
-
-  iconFiles = lib.mapAttrs' (size: _: {
-    name = "icons/hicolor/${size}/apps/photogimp.png";
-    value.source = "${photoGimp}/.local/share/icons/hicolor/${size}/apps/photogimp.png";
-  }) (lib.genAttrs iconSizes (_: true));
 in
 
 {
@@ -49,14 +36,5 @@ in
       after = [ "linkGeneration" ];
       before = [ ];
     };
-
-    # xdg.dataFile =
-    #   iconFiles
-    #   // {
-    #     "applications/org.gimp.GIMP.desktop".source =
-    #       "${photoGimp}/.local/share/applications/org.gimp.GIMP.desktop";
-    #     "icons/hicolor/photogimp.png".source =
-    #       "${photoGimp}/.local/share/icons/hicolor/photogimp.png";
-    #   };
   };
 }

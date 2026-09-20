@@ -50,15 +50,11 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixpkgs-xr,
       nix-flatpak,
       home-manager,
       vicinae,
-      vicinae-extensions,
-      freesmlauncher,
-      millennium,
       sops-nix,
       ...
     }@inputs:

@@ -5,7 +5,7 @@
     lazygit
   ];
 
-  home-manager.users.miguvt = { pkgs, ... }: {
+  home-manager.users.miguvt = { ... }: {
     programs.git = {
       enable = true;
       lfs.enable = true;
