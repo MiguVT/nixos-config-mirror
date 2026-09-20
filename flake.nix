@@ -87,11 +87,8 @@
           # Overlay exposing pkgs.stable globally
           {
             nixpkgs.overlays = [
-              (final: _prev: {
-                stable = import inputs.nixpkgs-stable {
-                  system = final.system;
-                  config.allowUnfree = false;
-                };
+              (_final: _prev: {
+                stable = inputs.nixpkgs-stable.legacyPackages."x86_64-linux";
               })
             ];
           }
