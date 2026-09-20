@@ -2,9 +2,7 @@
 
 {
   users.users.miguvt.packages = [
-    inputs.freesmlauncher.packages.${pkgs.stdenv.hostPlatform.system}.default
-
-    (pkgs.prismlauncher.override {
+    (inputs.freesmlauncher.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
       jdks = [
         pkgs.jdk21 # MC 1.20.5+
         pkgs.jdk17 # MC 1.18 - 1.20.4
