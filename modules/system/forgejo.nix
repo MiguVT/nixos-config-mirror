@@ -21,7 +21,7 @@
 
     settings.server.connections.default = {
       url = "https://git.miguvt.com/";
-      uuid = "04053b2b-74e0-4aae-bbe2-8828f404baa0";
+      uuid = "513eb2ba-a73f-4a0e-a6fd-cd169cf7393d";
       # token: injected from a systemd credential, never stored in the Nix store
     };
 
