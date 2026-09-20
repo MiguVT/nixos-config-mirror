@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 {
   # age identity derived from the sops-dedicated ed25519 key
