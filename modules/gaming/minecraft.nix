@@ -1,13 +1,13 @@
 { pkgs, inputs, ... }:
 
+let
+  freesm = inputs.freesmlauncher.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   users.users.miguvt.packages = [
-    (inputs.freesmlauncher.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
-      jdks = [
-        pkgs.jdk21 # MC 1.20.5+
-        pkgs.jdk17 # MC 1.18 - 1.20.4
-        pkgs.jdk8 # MC 1.16.5 and older
-      ];
+    (freesm.default.override {
+      # Standard openjdk pack (8/17/21/25) silences the wrapper's jdk8 warning
+      jdks = freesm.jvmPack.openjdk;
     })
   ];
 
