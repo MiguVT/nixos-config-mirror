@@ -9,26 +9,23 @@
     defaultNetwork.settings.dns_enabled = true;
   };
 
-  # TODO - setup Forgejo-runner
-  # 2. Forgejo Actions Runner
-  #services.gitea-actions-runner = {
-  #  package = pkgs.forgejo-runner;
+  # 2. Forgejo Actions Runner (uses the unstable pkgs.forgejo-runner by default)
+  services.forgejo-runner.instances.default = {
+    enable = true;
 
-  #  instances.default = {
-  #    enable = true;
-  #    name = "nixos-podman-runner";
+    # Maps workflow 'runs-on' values to container images (podman runtime)
+    settings.runner.labels = [
+      "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest"
+      "nix-latest:docker://nixos/nix:latest"
+    ];
 
-  #    # Replace with your actual Forgejo server URL
-  #    url = "https://git.miguvt.com";
+    settings.server.connections.default = {
+      url = "https://git.miguvt.com/";
+      uuid = "04053b2b-74e0-4aae-bbe2-8828f404baa0";
+      # token: injected from a systemd credential, never stored in the Nix store
+    };
 
-  #    # Securely load the token from outside the world-readable Nix store
-  #    tokenFile = "/var/lib/forgejo-runner-token.env";
-
-  #    # Maps workflow 'runs-on' values to container images
-  #    labels = [
-  #      "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest"
-  #      "nix-latest:docker://nixos/nix:latest"
-  #    ];
-  #  };
-  #};
+    # Exposed at /run/secrets/forgejo_token by sops-nix, loaded via LoadCredential
+    secrets.server.connections.default.token_url = "/run/secrets/forgejo_token";
+  };
 }

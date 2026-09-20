@@ -9,4 +9,6 @@
 
   # llama-server --api-key (read at runtime via systemd credential)
   sops.secrets."llamakey" = { };
+  # forgejo-runner registration token (consumed by services.forgejo-runner)
+  sops.secrets."forgejo_token" = { };
 }
