@@ -46,6 +46,22 @@
           catppuccin.catppuccin-vsc
           pkief.material-icon-theme
           esbenp.prettier-vscode
+
+          (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+            mktplcRef = {
+              name = "opencode";
+              publisher = "sst-dev";
+              version = "0.0.13";
+              hash = "sha256-6adXUaoh/OP5yYItH3GAQ7GpupfmTGaxkKP6hYUMYNQ=";
+            };
+            meta = {
+              description = "OpenCode - terminal-based AI coding agent";
+              homepage = "https://github.com/anomalyco/opencode";
+              downloadPage =
+                "https://marketplace.visualstudio.com/items?itemName=sst-dev.opencode";
+              license = pkgs.lib.licenses.mit;
+            };
+          })
         ];
 
         userSettings = {
