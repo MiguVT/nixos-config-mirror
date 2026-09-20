@@ -7,7 +7,6 @@
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.age.keyFile = "/home/miguvt/.config/sops/age/keys.txt";
 
-  sops.secrets.example-key = { };
   # llama-server --api-key (read at runtime via systemd credential)
   sops.secrets."llamakey" = { };
 }
