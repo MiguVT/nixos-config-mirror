@@ -36,6 +36,6 @@
     pkgs.lovr
   ];
 
-  # TODO: re-enable once proton-rtsp-bin is fixed for the new proton-ge-bin overrideAttrs interface
-  # programs.steam.extraCompatPackages = [ pkgs.proton-rtsp-bin ];
+  # VR/RTSP compat tool for Steam (list-appends with steam.nix's extraCompatPackages)
+  programs.steam.extraCompatPackages = [ pkgs.proton-rtsp-bin ];
 }
