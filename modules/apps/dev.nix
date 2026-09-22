@@ -32,6 +32,7 @@
     gcc
     mono
     msbuild
+    android-tools
   ];
 
   home-manager.users.miguvt = { pkgs, ... }: {
