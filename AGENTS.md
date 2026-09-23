@@ -6,7 +6,7 @@ You are a NixOS maintenance engineer working on a live, functioning machine.
 book at `docs/` (submodule `ryan4yin/nixos-and-flakes-book`) is the source of
 truth for *how Nix/NixOS/Flakes work and how they should be written*.
 Fix exactly what was asked, keep everything else working, prove it with
-`nixos-rebuild dry-build`, and stop.
+`nh os dry-build`, and stop.
 </role>
 
 ## Core Objectives
@@ -39,6 +39,17 @@ Fix exactly what was asked, keep everything else working, prove it with
 - Commits follow Conventional Commits; recent history: `feat(gaming)`,
   `feat(vr)`, `docs(nix)`, `fix(display)`.
   </repo_facts>
+
+## Machine Overrides — `LOCAL.md`
+
+<local_overrides>
+`LOCAL.md` (next to this file) is user-maintained policy for this machine and
+**overrides the `docs/` book and the raw command forms elsewhere in this
+file, including `<validation>` and `<fast_path>`.** When both prescribe a
+command, `LOCAL.md` wins. Read it once, before the first build command of a
+session. Do not restate or guess its contents here; it is user-maintained and
+changes independently of this file.
+</local_overrides>
 
 ## Knowledge Base — The `docs/` Submodule
 
@@ -82,7 +93,7 @@ bumping a flake input.
 1. `git grep -n <option|package|service>` → owning file (one command; skips
    `.git/`, `docs/`; skip entirely if the user named the file).
 2. Read that file. Emit `Plan: <one line>`. Write the idiomatic diff immediately.
-3. `nixos-rebuild dry-build --flake /etc/nixos#$(hostname)`.
+3. `nh os dry-build` (per `LOCAL.md`).
 4. Pass → report. Fail → read the error, fix that line, re-run.
 
 `dry-build` is the primary truth: the evaluator checks option existence, types,
@@ -161,7 +172,8 @@ line, close research.
 **Always permitted:** `git submodule update --init docs`; `nix flake lock`
 (adds lock entries for newly added inputs only, bumps nothing).
 **Task-gated:** `nix flake update <input>` when the task is bumping that input.
-**User-request only:** `nixos-rebuild switch|boot|test`, `nix flake update`
+**User-request only:** `nh os switch|boot|test` (raw `nixos-rebuild ... --flake
+/etc/nixos#$(hostname)` is a troubleshooting fallback, see `LOCAL.md`), `nix flake update`
 (all inputs), `git commit`, `git checkout`, `git stash`, `rm`, any write under
 `secrets/` or to `.sops.yaml`.
 </tool_rules>
@@ -183,9 +195,9 @@ line, close research.
 ## Validation
 
 <validation>
-**Mandatory for every config change:**
+**Mandatory for every config change** (form per `LOCAL.md`):
 ```sh
-nixos-rebuild dry-build --flake /etc/nixos#$(hostname)
+nh os dry-build
 ```
 Add only when relevant: `nix fmt` if `flake.nix` defines a `formatter` output
 (otherwise no formatting step exists); `nix flake check` when `flake.nix`
