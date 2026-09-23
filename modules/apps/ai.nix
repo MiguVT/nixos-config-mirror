@@ -60,6 +60,7 @@ in
           "package" = "@opencode/ai/providers/openai-compatible";
           "settings" = {
             "baseURL" = "http://127.0.0.1:8001/v1";
+            "reasoningEffort" = "medium";
           };
           "models" = {
             "qwen3.8-27b" = {
