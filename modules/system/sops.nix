@@ -5,7 +5,7 @@
   # (private key: /home/miguvt/.ssh/id_ed25519_bw, also stored in Bitwarden).
   # Edit secrets: sops secrets/secrets.yaml (from the flake dev shell)
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
-  sops.age.keyFile = "/home/miguvt/.config/sops/age/keys.txt";
+  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
 
   # forgejo-runner registration token (consumed by services.forgejo-runner)
   sops.secrets."forgejo_token" = { };
