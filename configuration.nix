@@ -17,6 +17,7 @@
     ./modules/hardware/lg4ff.nix
     ./modules/gaming/gale.nix
     ./modules/gaming/amethyst.nix
+    ./modules/gaming/aurora.nix
     ./modules/gaming/lutris.nix
     ./modules/gaming/ludusavi.nix
     ./modules/gaming/oversteer.nix
