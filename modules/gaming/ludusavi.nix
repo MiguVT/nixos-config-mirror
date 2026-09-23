@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-  users.users.miguvt.packages = [ pkgs.ludusavi ];
+  home-manager.users.miguvt.home.packages = [ pkgs.ludusavi ];
 }

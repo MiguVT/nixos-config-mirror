@@ -7,7 +7,7 @@
     { appId = "io.github.luohoa97.Cordial"; origin = "cordial"; }
   ];
 
-  users.users.miguvt.packages = [
+  home-manager.users.miguvt.home.packages = [
     # Pinned via flake.lock; see inputs.mocktail in flake.nix.
     inputs.mocktail.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];

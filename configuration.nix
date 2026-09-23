@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   ...
 }:
 
@@ -95,7 +94,6 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [ kdePackages.kate ];
   };
 
   system.stateVersion = "26.05";

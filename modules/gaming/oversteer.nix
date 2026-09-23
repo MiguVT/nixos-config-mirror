@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-  users.users.miguvt.packages = [ pkgs.oversteer ];
+  home-manager.users.miguvt.home.packages = [ pkgs.oversteer ];
 }

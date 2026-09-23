@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  users.users.miguvt.packages = [
+  home-manager.users.miguvt.home.packages = [
     pkgs.gale
   ];
 }

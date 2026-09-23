@@ -22,11 +22,12 @@
 
   # A negative nice value needs CAP_SYS_NICE, which a user session lacks by
   # default, so systemd --user silently drops Nice=. Grant it to the user
-  # manager (it survives the UID drop via auto-added keep-caps), then set it:
+  # manager (this applies to all user managers; miguvt is currently the only
+  # normal user), then set it:
   systemd.services."user@".serviceConfig.AmbientCapabilities = [ "CAP_SYS_NICE" ];
   systemd.user.services.monado.serviceConfig.Nice = -20;
 
-  users.users.miguvt.packages = [
+  home-manager.users.miguvt.home.packages = [
     # OpenVR -> OpenXR shim so OpenVR apps run on Monado without SteamVR
     pkgs.xrizer
     # Overlay: see and launch the desktop from inside VR

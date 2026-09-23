@@ -2,6 +2,7 @@
 
 {
   home-manager.users.miguvt.home.packages = with pkgs; [
+    kdePackages.kate
     audacity
     lsp-plugins
     deepfilternet

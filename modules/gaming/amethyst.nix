@@ -45,5 +45,5 @@ let
   };
 in
 {
-  users.users.miguvt.packages = [ amethyst ];
+  home-manager.users.miguvt.home.packages = [ amethyst ];
 }

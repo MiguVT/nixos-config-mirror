@@ -8,12 +8,8 @@ local/
 
 # Secrets (agenix / sops-nags / nix-secrets)
 secrets/*
-# Encrypted sops files are safe to commit
-!secrets/*.yaml
-!secrets/*.yml
-!secrets/*.json
-!secrets/*.ini
-!secrets/*.env
+# Allow only the currently tracked SOPS bundle; add future encrypted files explicitly.
+!secrets/secrets.yaml
 
 # Editor and OS cruft
 *~

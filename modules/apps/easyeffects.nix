@@ -8,8 +8,6 @@
     home.packages = with pkgs; [
       easyeffects
       rnnoise
-      lsp-plugins
-      calf
     ];
 
     services.easyeffects.enable = true;

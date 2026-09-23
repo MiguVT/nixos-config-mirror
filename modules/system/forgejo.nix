@@ -28,4 +28,26 @@
     # Exposed at /run/secrets/forgejo_token by sops-nix, loaded via LoadCredential
     secrets.server.connections.default.token_url = "/run/secrets/forgejo_token";
   };
+
+  # The NixOS runner module uses the host Podman API for docker-labeled jobs.
+  # Keep the runner process sandboxed; only register trusted repositories until
+  # the jobs are moved to a separately isolated runtime.
+  systemd.services.forgejo-runner-default.serviceConfig = {
+    NoNewPrivileges = true;
+    PrivateDevices = true;
+    PrivateTmp = true;
+    ProtectControlGroups = true;
+    ProtectHome = true;
+    ProtectKernelModules = true;
+    ProtectKernelTunables = true;
+    ProtectSystem = "strict";
+    RestrictSUIDSGID = true;
+    LockPersonality = true;
+    RestrictAddressFamilies = [
+      "AF_UNIX"
+      "AF_INET"
+      "AF_INET6"
+      "AF_NETLINK"
+    ];
+  };
 }
