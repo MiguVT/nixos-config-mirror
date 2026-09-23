@@ -68,7 +68,7 @@
     let
       name = lib.getName pkg;
     in
-    builtins.elem name [
+    lib.elem name [
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
