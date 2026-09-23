@@ -26,7 +26,7 @@
 
 | Task                     | Use (canonical)         | Raw equivalent (troubleshooting only)                     |
 | ------------------------ | ----------------------- | --------------------------------------------------------- |
-| Verify a config change   | `nh os dry-build`       | `nixos-rebuild dry-build --flake /etc/nixos#$(hostname)`  |
+| Verify a config change   | `nh os test --dry`      | `nixos-rebuild dry-build --flake /etc/nixos#$(hostname)`  |
 | Build + activate         | `nh os switch`          | `sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)`|
 | Activate at next boot    | `nh os boot`            | `sudo nixos-rebuild boot --flake /etc/nixos#$(hostname)`  |
 | Test without committing  | `nh os test`            | `sudo nixos-rebuild test --flake /etc/nixos#$(hostname)`  |
@@ -42,5 +42,5 @@ explain, re-run the raw equivalent from the table to see the underlying
 the raw forms.
 
 **Home Manager note:** on this machine Home Manager is loaded as a NixOS
-module, so `nh os dry-build` already covers it. Use `nh home switch` only
+module, so `nh os test --dry` already covers it. Use `nh home switch` only
 when the task is explicitly about the standalone home-manager flow.
