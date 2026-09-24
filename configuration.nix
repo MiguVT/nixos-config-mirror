@@ -24,6 +24,7 @@
     ./modules/gaming/index.nix
     ./modules/gaming/roblox.nix
     ./modules/gaming/hydralauncher.nix
+    ./modules/gaming/heroic.nix
     ./modules/gaming/vr.nix
     ./modules/system/nix.nix
     ./modules/system/zram.nix
