@@ -61,6 +61,7 @@
     ./modules/apps/isoimagewriter.nix
     ./modules/apps/archive.nix
     ./modules/apps/phone.nix
+    ./modules/apps/monero.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
