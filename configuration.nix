@@ -62,6 +62,7 @@
     ./modules/apps/archive.nix
     ./modules/apps/phone.nix
     ./modules/apps/monero.nix
+    ./modules/apps/tor.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
