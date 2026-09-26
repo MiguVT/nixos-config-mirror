@@ -9,6 +9,7 @@
     ripgrep
     nh
     nix-output-monitor
+    sshfs
   ];
 
   environment.sessionVariables = {
