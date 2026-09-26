@@ -63,6 +63,23 @@
               license = pkgs.lib.licenses.mit;
             };
           })
+
+          (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+            mktplcRef = {
+              name = "calagopus";
+              publisher = "calagopus";
+              version = "1.1.6";
+              hash = "sha256-w/NyBWMeckS/jjz5zIR6FLjfTfhfyK76+0N8l+fFy00=";
+            };
+            meta = {
+              description =
+                "Browse and edit Calagopus server files and access the server console directly from VS Code.";
+              homepage = "https://github.com/calagopus/vscode-extension";
+              downloadPage =
+                "https://marketplace.visualstudio.com/items?itemName=calagopus.calagopus";
+              license = pkgs.lib.licenses.mit;
+            };
+          })
         ];
 
         userSettings = {
