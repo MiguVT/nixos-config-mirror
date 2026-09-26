@@ -9,7 +9,7 @@
     ripgrep
     nh
     nix-output-monitor
-    sshfs
+    lftp
   ];
 
   environment.sessionVariables = {
