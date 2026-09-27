@@ -21,6 +21,8 @@
       pkgs.dwproton-bin
     ];
 
+    extraPackages = [ pkgs.umu-launcher ];
+
     protontricks.enable = true;
   };
 

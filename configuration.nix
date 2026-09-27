@@ -78,6 +78,7 @@
       "steam-original"
       "steam-run"
       "steam-unwrapped"
+      "umu-launcher"
       "unityhub"
       "corefonts"
     ]
