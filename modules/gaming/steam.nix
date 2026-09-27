@@ -24,6 +24,9 @@
     protontricks.enable = true;
   };
 
+  # Proton/WINE prefix manager for Steam games (Flatpak from Flathub).
+  services.flatpak.packages = [ "ru.linux_gaming.PortProton" ];
+
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
 
