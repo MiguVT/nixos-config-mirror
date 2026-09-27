@@ -21,8 +21,6 @@
       pkgs.dwproton-bin
     ];
 
-    extraPackages = [ pkgs.umu-launcher ];
-
     protontricks.enable = true;
   };
 
@@ -31,6 +29,9 @@
 
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
+
+  # Proton runner for non-Steam games; `umu-run` is available system-wide.
+  environment.systemPackages = [ pkgs.umu-launcher ];
 
   # WINE/Proton need far more open files than the systemd default. The
   # limits.d file covers PAM logins; DefaultLimitNOFILE covers systemd user
