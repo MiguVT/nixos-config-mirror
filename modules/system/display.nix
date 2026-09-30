@@ -7,6 +7,9 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     inter
+    # Microsoft fonts (Verdana, Arial, Calibri, ...) for Unity editors / ALCOM
+    corefonts
+    vista-fonts
   ];
 
   fonts.fontconfig = {

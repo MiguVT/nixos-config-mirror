@@ -81,6 +81,7 @@
       "steam-unwrapped"
       "unityhub"
       "corefonts"
+      "vista-fonts"
     ]
     # Catches cuda, cudnn, libcublas, libcufft, etc.
     || builtins.match ".*(cuda|cudnn|libcu).*" name != null;
