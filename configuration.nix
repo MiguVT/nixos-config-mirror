@@ -27,6 +27,7 @@
     ./modules/gaming/heroic.nix
     ./modules/gaming/vr.nix
     ./modules/system/nix.nix
+    ./modules/system/nix-ld.nix
     ./modules/system/zram.nix
     ./modules/system/scx.nix
     ./modules/system/sops.nix

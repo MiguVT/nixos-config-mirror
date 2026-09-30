@@ -1,23 +1,6 @@
 { pkgs, ... }:
 
 {
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      stdenv.cc.cc.lib
-      zlib
-      glibc
-      openssl
-      icu
-      util-linux
-      libglvnd
-      libx11
-      libxcursor
-      libxrandr
-      libxi
-    ];
-  };
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
