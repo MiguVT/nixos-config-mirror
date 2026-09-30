@@ -9,7 +9,7 @@ in
       # Standard openjdk pack (8/17/21/25) silences the wrapper's jdk8 warning
       jdks = freesm.jvmPack.openjdk;
     })
-    pkgs.pandoraLauncher
+    pkgs.pandora-launcher
     pkgs.mangohud
   ];
 
