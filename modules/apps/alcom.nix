@@ -8,5 +8,9 @@
   home-manager.users.miguvt.home.packages = with pkgs; [
     alcom
     unityhub
+    # ALCOM loads GStreamer at runtime (not a build dep) for its live
+    # screen-capture preview; the appsink element ships in gst-plugins-base.
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
   ];
 }
