@@ -28,6 +28,9 @@
       alsa-lib
       libpulseaudio
 
+      # GUI (Unity Editor: GTK3)
+      gtk3
+
       # X11
       libx11
       libxcursor
