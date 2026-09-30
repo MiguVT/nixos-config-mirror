@@ -15,7 +15,8 @@
       icu
       util-linux
       glib
-      libxml2
+      # libxml2_13: classic libxml2.so.2 SONAME (2.15.x bumped it to .so.16)
+      libxml2_13
       nss
 
       # Graphics (Unity Editor: OpenGL + Vulkan)
