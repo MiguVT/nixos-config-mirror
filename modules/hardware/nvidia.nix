@@ -5,7 +5,6 @@
   environment.sessionVariables = {
     # Expands global NVIDIA shader cache size to 100GB (100 * 1024 * 1024 * 1024 bytes)
     __GL_SHADER_DISK_CACHE_SIZE = "107374182400";
-    VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
   };
 
   hardware.graphics = {

@@ -1,10 +1,4 @@
-{ config, pkgs, ... }:
-let
-  # 64-bit NVIDIA driver. nix-ld is a 64-bit-only shim, so only the 64-bit
-  # driver libs belong in this bundle; 32-bit driver libs are provided
-  # system-wide via hardware.graphics.enable32Bit.
-  nvidiaPkg = config.hardware.nvidia.package;
-in
+{ pkgs, ... }:
 {
   # System-wide shared-library injection (LD_LIBRARY_PATH) for apps that need
   # FHS-style libraries: games, Unity editors (ALCOM), etc. Applied to all
@@ -27,10 +21,10 @@ in
       # Graphics (Unity Editor: OpenGL + Vulkan)
       libglvnd
       vulkan-loader
+      wayland
+      egl-wayland
       libdrm
       libgbm
-      # NVIDIA 64-bit driver (libcuda / libGLX_nvidia / libEGL_nvidia / libnvidia-*)
-      nvidiaPkg
 
       # Audio (Unity Editor + VRChat)
       alsa-lib
