@@ -41,6 +41,7 @@
     ./modules/system/firewall.nix
     ./modules/system/forgejo.nix
     ./modules/system/building.nix
+    ./modules/system/limine.nix
     ./modules/apps/firefox.nix
     ./modules/apps/chromium.nix
     ./modules/apps/terminal.nix
@@ -90,9 +91,7 @@
     # Catches cuda, cudnn, libcublas, libcufft, etc.
     || builtins.match ".*(cuda|cudnn|libcu).*" name != null;
 
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.limine.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
