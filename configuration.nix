@@ -90,7 +90,8 @@
     # Catches cuda, cudnn, libcublas, libcufft, etc.
     || builtins.match ".*(cuda|cudnn|libcu).*" name != null;
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos";
