@@ -26,6 +26,8 @@
     ./modules/gaming/hydralauncher.nix
     ./modules/gaming/heroic.nix
     ./modules/gaming/vr.nix
+    ./modules/gaming/sm64coopdx.nix
+    ./modules/gaming/mari0.nix
     ./modules/system/nix.nix
     ./modules/system/nix-ld.nix
     ./modules/system/zram.nix
@@ -82,6 +84,8 @@
       "unityhub"
       "corefonts"
       "vista-fonts"
+      "sm64coopdx"
+      "baserom.us.z64"
     ]
     # Catches cuda, cudnn, libcublas, libcufft, etc.
     || builtins.match ".*(cuda|cudnn|libcu).*" name != null;
