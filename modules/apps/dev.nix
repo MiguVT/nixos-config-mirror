@@ -18,6 +18,11 @@
     android-tools
   ];
 
+  environment.sessionVariables = {
+    EDITOR = "codium --wait";
+    VISUAL = "codium --wait";
+  };
+
   home-manager.users.miguvt = { pkgs, ... }: {
     programs.vscodium = {
       enable = true;
