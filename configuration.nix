@@ -21,7 +21,6 @@
     ./modules/gaming/oversteer.nix
     ./modules/gaming/steam.nix
     ./modules/gaming/minecraft.nix
-    ./modules/gaming/ldstudio.nix
     #./modules/gaming/index.nix <-- FIXED ON UPSTREAM
     ./modules/gaming/roblox.nix
     ./modules/gaming/hydralauncher.nix
@@ -91,8 +90,6 @@
     ]
     # Catches cuda, cudnn, libcublas, libcufft, etc.
     || builtins.match ".*(cuda|cudnn|libcu).*" name != null;
-
-
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
