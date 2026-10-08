@@ -3,10 +3,10 @@ let
   # Upstream standalone release; nixpkgs still ships opencode v1.
   opencode-v2 = pkgs.stdenvNoCC.mkDerivation {
     pname = "opencode";
-    version = "2.0.6";
+    version = "2.0.25";
     src = pkgs.fetchurl {
-      url = "https://opencode.ai/files/bin/2.0.6/opencode-linux-x64.tar.gz";
-      sha256 = "833003213e155266c073ae3f19e2a63d027b9d66a8bc9a4610ec9c9d4b369c8d";
+      url = "https://opencode.ai/files/bin/2.0.25/opencode-linux-x64.tar.gz";
+      sha256 = "bbdb7eb66d42e57f64c3591e3dc998be8cde32e7f663a8bfb0ecd1612c31a13a";
     };
     # Tarball contains only the top-level binary; stdenv's directory
     # detection aborts on file-only archives, so unpack into src/ ourselves.
