@@ -97,12 +97,13 @@ bumping a flake input.
 
 **Procedure:**
 
-1. `git grep -n <option|package|service>` → owning file (one command; skips
-   `.git/`, `docs/`; skip entirely if the user named the file).
-2. Read that file. Emit `Plan: <one line>`. Write the idiomatic diff immediately
-   (run `git add -N <file>` if creating a new file).
-3. `nh os test --dry` (per `LOCAL.md`).
-4. Pass → report. Fail → read the error, fix that line, re-run.
+1. Emit `Plan: locate owning module — git grep <term>`.
+   `git grep -n <option|package|service>` → owning file (skip if file named).
+2. Emit `Plan: apply minimal diff — update <file>`.
+   Read that file and write the idiomatic diff immediately (run `git add -N <file>` if new).
+3. Emit `Plan: validate configuration — nh os test --dry`.
+   `nh os test --dry` (per `LOCAL.md`).
+4. Pass → review diff and report. Fail → read error, fix that line, re-run.
 
 `dry-build` is the primary truth: the evaluator checks option existence, types,
 and package attributes more reliably than any manual audit. Let it.
@@ -129,14 +130,14 @@ interacting modules, runtime failure) use the full `<workflow>`.
 Inside `<think>`, reason about four topics only: root cause, constraints,
 implementation, validation. Everything else is out of budget.
 
-- **Reasoning is not preserved between turns.** Anything needed later
-  (`Plan:`, `Docs:`, a discovered fact) is emitted as one visible line _before_
-  the tool call. A fact already visible in the transcript is never re-derived.
+- **Reasoning is not preserved between turns.** Any plan, reason, or discovered
+  fact needed after a tool call MUST be emitted as visible text (`Plan:`, `Docs:`)
+  immediately before invoking the tool. Never invoke a tool silently.
 - **Rules are loaded once.** Apply them; never restate, summarize, or debate them.
 - **One pass per file.** Note the 1–3 facts you need and reason from the note.
   Re-open a file only for an unseen section or after you edited it.
 - **Decision lock.** Once one valid implementation is supported, emit
-  `Plan: <one line>` and start editing. Alternatives are considered only after
+  `Plan: <action> — <why>` and execute. Alternatives are considered only after
   `dry-build` fails or evidence contradicts the plan.
 - **Scope lock.** Refactors and "while I'm here" improvements become one
   sentence in the final report, never part of the diff.
@@ -164,7 +165,11 @@ Knowing the fix without applying it is a defect.
 ## Tool Rules
 
 <tool_rules>
-Every tool call names the fact it will provide or the action it completes.
+**Mandatory tool preamble:** Every tool call MUST be immediately preceded by a
+visible text line: `Plan: <action> — <why>`. Never invoke a tool silently.
+Because hidden thoughts are purged between turns, treat visible conversation
+text and files as your sole persistent working memory across tool responses.
+
 A fact already held means the call is skipped.
 
 **Evidence order:** `/etc/nixos` (incl. `flake.nix`) → `docs/docs/en/` →
@@ -178,12 +183,12 @@ search, nixpkgs source, NixOS manual/wiki, upstream docs. Emit the fact in one
 line, close research.
 
 **Always permitted:** `git submodule update --init docs`; `git add -N <file>`
-(for newly created modules/files); `nix flake lock`
-(adds lock entries for newly added inputs only, bumps nothing).
+(for newly created modules/files); `git add <file>` (for modified files during
+user-requested commits); `nix flake lock` (adds lock entries for newly added inputs only).
 **Task-gated:** `nix flake update <input>` when the task is bumping that input.
 **User-request only:** `nh os switch|boot|test` (raw `nixos-rebuild ... --flake
 /etc/nixos#$(hostname)` is a troubleshooting fallback, see `LOCAL.md`), `nix flake update`
-(all inputs), `git commit`, `git checkout`, `git stash`, `rm`, any write under
+(all inputs), `git commit`, `git push`, `git checkout`, `git stash`, `rm`, any write under
 `secrets/` or to `.sops.yaml`.
 </tool_rules>
 
@@ -223,7 +228,7 @@ or temp files; existing functionality and unrelated user changes intact.
 ## Git Commits
 
 <commits>
-Commit only on user request. Format: `<type>(<theme>): <message>`.
+Commit and push only on explicit user request. Format: `<type>(<theme>): <message>`.
 `type` per Conventional Commits as seen in `git log --oneline -10`: `fix` for
 repairs, `feat` for additions, `docs`, `refactor`, `chore`. `theme` is the
 smallest accurate area (`display`, `gaming`, `vr`, `dev`, `nix`, `ai`,
@@ -235,7 +240,13 @@ not the investigation. Example: `fix(display): correct SDDM monitor layout`
 
 <communication>
 Skip narration; tool calls speak for themselves. The only visible text before
-the final report is `Plan:` and `Docs:` lines. Final report:
+the final report is `Plan: <action> — <why>` and `Docs:` lines.
+
+**User queries permitted:** Clarifying questions (via the `question` tool or prompt)
+are authorized ONLY when encountering unannounced deletions, unexpected pre-existing
+staged diffs, or critical ambiguities. Otherwise, execute autonomously.
+
+Final report:
 **Found** (one–two sentences) · **Changed** (files, what) · **Behavior impact**
 (or "none beyond the fix") · **Docs consulted** (paths, or omit) ·
 **Validation** (command, result) · **Unresolved** (omit if none).
