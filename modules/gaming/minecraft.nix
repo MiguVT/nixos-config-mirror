@@ -11,6 +11,7 @@ in
     })
     pkgs.pandora-launcher
     pkgs.mangohud
+    pkgs.blockbench
   ];
 
   # FreesmLauncher auto-detects these system JDKs. Keeping multiple versions
