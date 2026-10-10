@@ -7,7 +7,7 @@ in
   home-manager.users.miguvt.home.packages = [
     (freesm.default.override {
       # Standard openjdk pack (8/17/21/25) silences the wrapper's jdk8 warning
-      jdks = freesm.jvmPack.openjdk;
+      jdks = freesm.jvmPack.temurin;
     })
     pkgs.pandora-launcher
     pkgs.mangohud
