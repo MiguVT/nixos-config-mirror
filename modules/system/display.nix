@@ -31,6 +31,45 @@
     kdePackages.qtstyleplugin-kvantum
   ];
 
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    merkuro
+    kontact
+    kmail
+    akonadiconsole
+    
+    # Games
+    kpat
+    kmahjongg
+    kmines
+    ksudoku
+    
+    # Educational
+    kanagram
+    kgeography
+    khangman
+    kiten
+    ktouch
+    kturtle
+    kwordquiz
+    
+    # Productivity/Utilities they don't want
+    akregator
+    dragon
+    kolourpaint
+    konversation
+    konsole
+    kcalc
+    kompare
+    
+    # Accessibility
+    kmag
+    kmousetool
+    kmouth
+    
+    # Development (except kate which they want to keep)
+    kdevelop
+  ];
+
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
