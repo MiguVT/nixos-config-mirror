@@ -20,7 +20,6 @@
 
     freesmlauncher = {
       url = "github:FreesmTeam/FreesmLauncher?ref=develop";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     mocktail.url = "github:komaruworld/mocktail";
