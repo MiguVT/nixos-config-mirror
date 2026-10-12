@@ -87,9 +87,14 @@
       "vista-fonts"
       "sm64coopdx"
       "baserom.us.z64"
-    ]
-    # Catches cuda, cudnn, libcublas, libcufft, etc.
-    || builtins.match ".*(cuda|cudnn|libcu).*" name != null;
+      "cccl"
+      "cuda_cudart"
+      "cuda_nvcc"
+      "libnvvm"
+      "cuda_crt"
+      "libcublas"
+      "cuda_nvrtc"
+    ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
