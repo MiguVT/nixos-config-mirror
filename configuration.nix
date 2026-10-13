@@ -95,6 +95,7 @@
       "cuda_crt"
       "libcublas"
       "cuda_nvrtc"
+      "hytale-launcher"
     ];
 
   networking.hostName = "nixos";
