@@ -41,6 +41,7 @@
 
     hytale-launcher-flake = {
       url = "github:visoredkon/hytale-launcher-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -82,6 +83,9 @@
               (_final: _prev: {
                 stable = inputs.nixpkgs-stable.legacyPackages."x86_64-linux";
               })
+
+              # Exposes pkgs.hytale-launcher (unfree; allowed via allowUnfreePredicate)
+              inputs.hytale-launcher-flake.overlays.default
             ];
           }
 

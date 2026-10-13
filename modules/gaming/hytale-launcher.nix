@@ -1,6 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
-  home-manager.users.miguvt.home.packages = [
-    (inputs.hytale-launcher-flake.packages.${pkgs.stdenv.hostPlatform.system}.default)
-  ];
+  home-manager.users.miguvt.home.packages = [ pkgs.hytale-launcher ];
 }
