@@ -75,6 +75,7 @@
     wayland.enable = true;
   };
 
+  programs.kde-pim.enable = false;
   # Copy (not symlink) the user's KWin layout into sddm's config dir at boot so
   # the greeter matches the session; a symlink is unreadable since /home/miguvt is 0700.
   systemd.tmpfiles.rules = [
