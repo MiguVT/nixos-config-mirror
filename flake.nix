@@ -38,6 +38,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hytale-launcher-flake = {
+      url = "github:visoredkon/hytale-launcher-flake";
+    };
   };
 
   outputs =
