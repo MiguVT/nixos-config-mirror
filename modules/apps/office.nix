@@ -4,5 +4,6 @@
   home-manager.users.miguvt.home.packages = with pkgs; [
     onlyoffice-desktopeditors
     owncloud-client
+    pandoc
   ];
 }
