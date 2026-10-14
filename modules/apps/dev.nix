@@ -97,6 +97,6 @@
         };
       };
     };
-    home.packages = with pkgs; [ netbeans ];
+    home.packages = with pkgs; [ netbeans ghidra ];
   };
 }
