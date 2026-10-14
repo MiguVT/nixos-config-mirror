@@ -5,5 +5,6 @@
     onlyoffice-desktopeditors
     owncloud-client
     pandoc
+    texliveSmall
   ];
 }
