@@ -69,6 +69,8 @@
     ./modules/apps/phone.nix
     ./modules/apps/monero.nix
     ./modules/apps/tor.nix
+    ./modules/apps/virt-viewer.nix
+    ./modules/apps/virt-manager.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
