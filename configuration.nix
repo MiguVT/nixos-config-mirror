@@ -99,6 +99,7 @@
       "libcublas"
       "cuda_nvrtc"
       "hytale-launcher"
+      "rpcs3"
     ];
 
   networking.hostName = "nixos";

@@ -103,6 +103,7 @@
               imports = [
                 vicinae.homeManagerModules.default
                 ./modules/home/vr.nix
+                ./modules/home/gaming.nix
               ];
               home.stateVersion = "24.11";
             };
