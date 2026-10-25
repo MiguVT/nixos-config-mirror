@@ -4,6 +4,11 @@
   services.xserver.enable = true; # Xwayland compatibility
   services.desktopManager.plasma6.enable = true;
 
+  # Workaround for Plasma 6.8.x KWin Wayland stutter / FPS drops
+  environment.sessionVariables = {
+    KWIN_DRM_USE_COLOR_PIPELINE = "1";
+  };
+
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     inter
@@ -26,8 +31,8 @@
 
   environment.systemPackages = with pkgs; [
     plasma-panel-colorizer
-    kdePackages.krohnkite
-    klassy
+    # kdePackages.krohnkite <== TODO - atm it doesnt work well with KDE Plasma 6.8, waiting for updates
+    # klassy <== TODO - atm it doesnt work well with KDE Plasma 6.8, waiting for updates
     kdePackages.qtstyleplugin-kvantum
   ];
 
@@ -36,13 +41,13 @@
     kontact
     kmail
     akonadiconsole
-    
+
     # Games
     kpat
     kmahjongg
     kmines
     ksudoku
-    
+
     # Educational
     kanagram
     kgeography
@@ -51,7 +56,7 @@
     ktouch
     kturtle
     kwordquiz
-    
+
     # Productivity/Utilities they don't want
     akregator
     dragon
@@ -60,12 +65,12 @@
     konsole
     kcalc
     kompare
-    
+
     # Accessibility
     kmag
     kmousetool
     kmouth
-    
+
     # Development (except kate which they want to keep)
     kdevelop
   ];
