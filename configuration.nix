@@ -19,6 +19,7 @@
     ./modules/gaming/lutris.nix
     ./modules/gaming/ludusavi.nix
     ./modules/gaming/oversteer.nix
+    ./modules/gaming/pegasus.nix
     ./modules/gaming/steam.nix
     ./modules/gaming/minecraft.nix
     #./modules/gaming/index.nix <-- FIXED ON UPSTREAM
