@@ -31,8 +31,7 @@
 
   environment.systemPackages = with pkgs; [
     plasma-panel-colorizer
-    # kdePackages.krohnkite <== TODO - atm it doesnt work well with KDE Plasma 6.8, waiting for updates
-    # klassy <== TODO - atm it doesnt work well with KDE Plasma 6.8, waiting for updates
+    klassy
     kdePackages.qtstyleplugin-kvantum
   ];
 
