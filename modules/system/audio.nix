@@ -20,7 +20,7 @@
     };
     wireplumber = {
       extraConfig = {
-        "50-ldac-hq" = {
+        "50-ldac-sq" = {
           "monitor.bluez.rules" = [
             {
               matches = [
@@ -28,7 +28,7 @@
               ];
               actions = {
                 update-props = {
-                  "bluez5.a2dp.ldac.quality" = "hq";
+                  "bluez5.a2dp.ldac.quality" = "sq";
                 };
               };
             }
