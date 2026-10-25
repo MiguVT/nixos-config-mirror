@@ -26,6 +26,7 @@
     ./modules/gaming/roblox.nix
     ./modules/gaming/hydralauncher.nix
     ./modules/gaming/heroic.nix
+    ./modules/gaming/xbox.nix
     ./modules/gaming/hytale-launcher.nix
     ./modules/gaming/vr.nix
     ./modules/gaming/sm64coopdx.nix
