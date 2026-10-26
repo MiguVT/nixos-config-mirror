@@ -1,40 +1,8 @@
 { pkgs, ... }:
-let
-  # Upstream standalone release; nixpkgs still ships opencode v1.
-  opencode-v2 = pkgs.stdenvNoCC.mkDerivation {
-    pname = "opencode";
-    version = "2.0.25";
-    src = pkgs.fetchurl {
-      url = "https://opencode.ai/files/bin/2.0.25/opencode-linux-x64.tar.gz";
-      sha256 = "bbdb7eb66d42e57f64c3591e3dc998be8cde32e7f663a8bfb0ecd1612c31a13a";
-    };
-    # Tarball contains only the top-level binary; stdenv's directory
-    # detection aborts on file-only archives, so unpack into src/ ourselves.
-    unpackPhase = ''
-      runHook preUnpack
-      mkdir src
-      tar -xf "$src" -C src
-      runHook postUnpack
-    '';
-    sourceRoot = "src";
-    dontBuild = true;
-    installPhase = ''
-      mkdir -p $out/bin
-      install -Dm755 opencode $out/bin/opencode
-    '';
-    meta = with pkgs.lib; {
-      description = "AI coding agent built for the terminal";
-      homepage = "https://opencode.ai";
-      license = licenses.mit;
-      platforms = [ "x86_64-linux" ];
-      mainProgram = "opencode";
-    };
-  };
-in
 {
   environment.systemPackages = [
     (pkgs.llama-cpp.override { cudaSupport = true; })
-    opencode-v2
+    pkgs.opencode
   ];
 
   # TODO: Setup llama-cpp service
