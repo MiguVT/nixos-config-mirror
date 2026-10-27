@@ -3,6 +3,23 @@
   environment.systemPackages = [
     (pkgs.llama-cpp.override { cudaSupport = true; })
     pkgs.opencode
+    # Moodle MCP server — exposes Moodle Web Services over stdio to MCP clients.
+    # Upstream: https://github.com/G36maid/moodle-mcp (no flake; built from source)
+    (pkgs.rustPlatform.buildRustPackage rec {
+      pname = "moodle-mcp";
+      version = "0.2.1";
+      src = pkgs.fetchFromGitHub {
+        owner = "G36maid";
+        repo = "moodle-mcp";
+        rev = "v${version}";
+        sha256 = "1lhnr221z2ld20j790lb20zyq9h04nmc5kmkr48jwnrsbsnfsqdg";
+      };
+      nativeBuildInputs = [ pkgs.pkg-config ];
+      buildInputs = [ pkgs.openssl ];
+      cargoHash = "sha256-zIyZM5IiHu95/Wmo3VSwVyF3fRIcXkCMCwsU9aRO9n4=";
+      # Test suite requires system CA certs + network access; skip in sandbox.
+      doCheck = false;
+    })
   ];
 
   # TODO: Setup llama-cpp service
