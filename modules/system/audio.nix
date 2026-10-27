@@ -9,30 +9,12 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    extraConfig = {
-      pipewire = {
-        "10-rates" = {
-          "context.properties" = {
-            "resample.quality" = 10;
-          };
-        };
-      };
-    };
-    wireplumber = {
-      extraConfig = {
-        "50-ldac-sq" = {
-          "monitor.bluez.rules" = [
-            {
-              matches = [
-                { "device.name" = "~bluez_card.*"; }
-              ];
-              actions = {
-                update-props = {
-                  "bluez5.a2dp.ldac.quality" = "sq";
-                };
-              };
-            }
-          ];
+
+    wireplumber.extraConfig = {
+      "10-disable-headset-profile-switch" = {
+        "wireplumber.settings" = {
+          # Prevents switching to terrible-sounding mono mode when games/Discord start
+          "bluetooth.autoswitch-to-headset-profile" = false;
         };
       };
     };
