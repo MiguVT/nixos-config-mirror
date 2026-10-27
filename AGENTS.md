@@ -21,8 +21,10 @@ Fix exactly what was asked, keep everything else working, prove it with
    formatting, idioms. When existing code and the book disagree, existing code
    wins for the diff; the book wins for every _new_ construct; the divergence
    becomes one sentence in the final report.
-4. **Answer knowledge questions from `docs/` first**, the web last.
-5. **Validate with `dry-build` before reporting done.** Always.
+4. **Answer knowledge questions from MCP first** (Context7 for library docs;
+   mcp-nixos for nixpkgs/NixOS data), then `docs/`, then the web.
+5. **Validate with `dry-build` before reporting done.** Always. MCP lookups
+   inform the change; `nh os test --dry` proves it.
    </core_objectives>
 
 ## Repository Facts
@@ -87,6 +89,62 @@ option names and defaults are confirmed by `dry-build` or `nixos-option`,
 since the book may lag nixpkgs.
 </knowledge_base>
 
+## Live Data — MCP Servers
+
+<mcp_servers>
+
+Two MCP servers are available through `execute`. They return live data, so they
+outrun static training knowledge — prefer them over web search for the facts
+below. MCP results inform the change; `nh os test --dry` still proves it.
+
+### Which MCP to use
+
+| Fact needed | Server | Tool |
+|-------------|--------|------|
+| Library/framework/SDK/API/CLI docs (syntax, config, migration, setup) | Context7 | `query-docs` (after `resolve-library-id` if you only have a package name) |
+| NixOS / home-manager / nix-darwin / NVF option name or default | mcp-nixos | `nix {action:search, type:options, source:<home-manager\|nvf\|default>}` |
+| Is package X in channel Y / attribute path for a package | mcp-nixos | `nix {action:info, query:X, channel:Y}` |
+| Does package X have a binary cache | mcp-nixos | `nix {action:cache, query:X}` |
+| Read a `/nix/store/<path>` | mcp-nixos | `nix {action:store, type:read, query:/nix/store/<path>}` |
+| Which nixpkgs commit shipped package X version Y | mcp-nixos | `nix_versions {package:X, version:Y}` |
+
+### Context7 (`tools["context7"]`)
+
+Current documentation for libraries, frameworks, SDKs, APIs, and CLI tools.
+Query Context7 first for library-specific facts before falling back to web search.
+
+Tools: `resolve-library-id` (map a package name to a library ID), `query-docs`
+(retrieve documentation scoped to one concept).
+
+**Do not use Context7 for:** refactoring, writing scripts from scratch, debugging
+business logic, code review, or general programming concepts.
+
+### mcp-nixos (`tools["nixos-mcp"]`)
+
+Live NixOS/nixpkgs data from search.nixos.org, NixHub, FlakeHub,
+cache.nixos.org, the NixOS wiki, and nix.dev. Use for package names, attribute
+paths, NixOS / home-manager / nix-darwin / NVF options, channels, flake inputs,
+binary caches, `/nix/store/` paths, and package version history. Trigger on any
+mention of these; use even when you think you know the answer — training data
+lags nixpkgs by months.
+
+Tools:
+- `nix` — unified search/info/stats/browse/channels/flake-inputs/cache/store.
+  Common intents (copy the JSON shape exactly):
+  - "is package X in channel Y?" → `nix {"action":"info","query":"X","channel":"Y"}`
+  - "search NixOS options for X" → `nix {"action":"search","query":"X","type":"options"}`
+  - "home-manager option for X" → `nix {"action":"search","source":"home-manager","query":"X"}`
+  - "NVF option for X" → `nix {"action":"search","source":"nvf","query":"X"}`
+  - "does X have a binary cache?" → `nix {"action":"cache","query":"X"}`
+  - "read /nix/store/<path>" → `nix {"action":"store","type":"read","query":"/nix/store/<path>"}`
+- `nix_versions` — which nixpkgs commit shipped package X version Y
+  (`nix_versions {"package":"X","version":"Y"}`).
+
+Prefer an MCP lookup over web search whenever the fact is library documentation
+(Context7) or NixOS/nixpkgs data (mcp-nixos).
+
+</mcp_servers>
+
 ## Fast Path — Optimistic Execution
 
 <fast_path>
@@ -113,7 +171,8 @@ message itself does not resolve, or when the option path stays ambiguous after
 one `nixos-option`/`nix eval` lookup and one `docs/` lookup:
 
 - `/proc`, `/sys`, `lsmod`, kernel config/symbols, `dmesg`
-- `nix-store` queries, `nix path-info`, `nix why-depends`
+- `nix-store` queries, `nix path-info`, `nix why-depends` (or mcp-nixos
+  `store`/`cache` lookups)
 - pre-emptive `nix build` of individual packages
 - `journalctl`, `systemctl status` (only when the _reported issue_ is runtime)
 - reads of unrelated modules or `hardware-configuration.nix`
@@ -172,15 +231,19 @@ text and files as your sole persistent working memory across tool responses.
 
 A fact already held means the call is skipped.
 
-**Evidence order:** `/etc/nixos` (incl. `flake.nix`) → `docs/docs/en/` →
-`git log`/`blame` → `nixos-option <path>`, `nix eval`, `nix search nixpkgs <pkg>`,
-`man configuration.nix` → web.
+**Evidence order:** `/etc/nixos` (incl. `flake.nix`) → MCP lookup
+(Context7 for library docs; mcp-nixos for nixpkgs/NixOS options, packages,
+channels, caches, store paths) → `docs/docs/en/` → `git log`/`blame` →
+`nixos-option <path>`, `nix eval`, `man configuration.nix` → web.
+
+When an MCP lookup resolves the fact, emit it as visible text and proceed — no
+docs/web lookup needed. MCP informs the change; `nh os test --dry` proves it.
 
 **Web search gate:** complete both sentences first —
 _"The exact fact I am missing is \_\_\_."_ and _"`docs/` chapter \_\_\_ did not contain it."_
-An empty blank means skip. One targeted query per fact; prefer NixOS options
-search, nixpkgs source, NixOS manual/wiki, upstream docs. Emit the fact in one
-line, close research.
+An empty blank means skip. One targeted query per fact; prefer an MCP lookup
+(Context7 for library docs; mcp-nixos for nixpkgs/NixOS data) over web search.
+Emit the fact in one line, close research.
 
 **Always permitted:** `git submodule update --init docs`; `git add -N <file>`
 (for newly created modules/files); `git add <file>` (for modified files during
