@@ -10,6 +10,7 @@
     nh
     nix-output-monitor
     lftp
+    uv
   ];
 
   environment.sessionVariables = {
