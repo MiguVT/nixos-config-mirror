@@ -8,7 +8,7 @@
     settings.General = {
       # Enables battery percentage display for connected devices
       Experimental = true;
-      FastConnectable = true;
+      FastConnectable = false;
     };
   };
 }
