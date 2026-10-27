@@ -87,4 +87,17 @@
     "R! /var/lib/sddm/.config/kwinoutputconfig.json"
     "C /var/lib/sddm/.config/kwinoutputconfig.json 0644 sddm sddm - /home/miguvt/.config/kwinoutputconfig.json"
   ];
+
+  # Defer power/lid handling to Plasma 6 instead of systemd-logind. Plasma owns
+  # the session and already handles the power/suspend/hibernate buttons; letting
+  # logind also act on them can cause double-handling conflicts.
+  services.logind.settings.Login = {
+    HandlePowerKey = "ignore";
+    HandleSuspendKey = "ignore";
+    HandleHibernateKey = "ignore";
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchDockedExternalPower = "ignore";
+  };
 }

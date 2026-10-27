@@ -58,6 +58,9 @@
           };
         };
       };
+      "plugins" = [
+        "@upstash/context7-opencode"
+      ];
     };
   };
 }

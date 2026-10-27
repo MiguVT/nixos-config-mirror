@@ -1,0 +1,13 @@
+{
+  "mcp": {
+    "servers": {
+      "nixos-mcp": {
+        "type": "local",
+        "command": [
+          "uvx",
+          "mcp-nixos"
+        ]
+      }
+    }
+  }
+}
