@@ -60,6 +60,8 @@
       };
       "plugins" = [
         "@upstash/context7-opencode"
+        "envsitter-guard@latest"
+        "github:JRedeker/opencode-morph-fast-apply#v1.12.0"
       ];
     };
   };
