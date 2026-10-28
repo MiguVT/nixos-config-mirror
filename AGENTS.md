@@ -316,6 +316,10 @@ the smallest accurate area (e.g. `display`, `gaming`, `vr`, `dev`, `nix`,
 `ai`, `network`, `boot`, `audio`, `flake`). Imperative message describing
 the change, not the investigation. Example: `fix(display): correct SDDM
 monitor layout`
+
+**Important:** Commit messages must not be emoticons or single tokens like
+`:b` or `:c`. Use the full `<type>(<theme>): <message>` format. Emoticon-only
+messages make it difficult to track changes via git log and automation.
 </commits>
 
 ## Communication & Finish
