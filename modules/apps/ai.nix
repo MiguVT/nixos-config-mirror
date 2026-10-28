@@ -33,36 +33,39 @@
   ];
 
   home-manager.users.miguvt = {
-    xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
-      "$schema" = "https://opencode.ai/config.json";
-      "model" = "local-llama/qwen3.8-27b";
-      # NixOS-managed binary: do not let it self-update.
-      "update" = "disable";
+    xdg.configFile."opencode/opencode.json" = {
+      text = builtins.toJSON {
+        "$schema" = "https://opencode.ai/config.json";
+        "model" = "local-llama/qwen3.8-27b";
+        # NixOS-managed binary: do not let it self-update.
+        "update" = "disable";
 
-      "providers" = {
-        "local-llama" = {
-          "name" = "Local Llama Server";
-          "package" = "@opencode/ai/providers/openai-compatible";
-          "settings" = {
-            "baseURL" = "http://127.0.0.1:8001/v1";
-            "reasoningEffort" = "medium";
-          };
-          "models" = {
-            "qwen3.8-27b" = {
-              "name" = "qwen3.8-27b (local)";
-              "limit" = {
-                "context" = 65536;
-                "output" = 8192;
+        "providers" = {
+          "local-llama" = {
+            "name" = "Local Llama Server";
+            "package" = "@opencode/ai/providers/openai-compatible";
+            "settings" = {
+              "baseURL" = "http://127.0.0.1:8001/v1";
+              "reasoningEffort" = "medium";
+            };
+            "models" = {
+              "qwen3.8-27b" = {
+                "name" = "qwen3.8-27b (local)";
+                "limit" = {
+                  "context" = 65536;
+                  "output" = 8192;
+                };
               };
             };
           };
         };
+        "plugins" = [
+          "@upstash/context7-opencode"
+          "envsitter-guard@latest"
+          "github:JRedeker/opencode-morph-fast-apply#v1.12.0"
+        ];
       };
-      "plugins" = [
-        "@upstash/context7-opencode"
-        "envsitter-guard@latest"
-        "github:JRedeker/opencode-morph-fast-apply#v1.12.0"
-      ];
+      force = true;
     };
   };
 }
