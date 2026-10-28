@@ -6,9 +6,8 @@
 
   home-manager.users.miguvt = { pkgs, ... }: {
     home.packages = with pkgs; [
-      ghostty
       kitty
     ];
   };
-  # kitty will be removed in a future revision; ghostty is the current primary terminal
+  # kitty will be removed in a future revision
 }
