@@ -22,7 +22,7 @@
     ./modules/gaming/pegasus.nix
     ./modules/gaming/steam.nix
     ./modules/gaming/minecraft.nix
-    #./modules/gaming/index.nix <-- FIXED ON UPSTREAM
+    ./modules/gaming/index.nix # <-- WILL BE FIXED ON UPSTREAM SOON
     ./modules/gaming/roblox.nix
     ./modules/gaming/hydralauncher.nix
     ./modules/gaming/heroic.nix
