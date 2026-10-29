@@ -11,10 +11,9 @@ let
     fi
     # Launch Steam Gamepad UI inside a nested Gamescope session
     # -e: exit Gamescope when the child exits
-    # -f: run in fullscreen mode (auto-detects main display resolution)
-    # -r: refresh rate (remove to auto-detect)
+    # -f: run in fullscreen mode (auto-detects main display resolution and refresh rate)
     # --: separator between gamescope and steam args
-    exec gamescope -e -f -r 60 -- steam -gamepadui
+    exec gamescope -e -f -- steam -gamepadui
   '';
 in
 {
