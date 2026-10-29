@@ -1,6 +1,22 @@
 { inputs, pkgs, ... }:
 
+let
+  steamosScript = pkgs.writeShellScriptBin "steamos-gamescope" ''
+    #!/usr/bin/env bash
+    # Close any running Steam instance so Gamescope can take over
+    pkill -f "steam" 2>/dev/null || true
+    sleep 1
+    # Launch Steam Gamepad UI inside a nested Gamescope session
+    # -e: exit Gamescope when the child exits
+    # -f: run in fullscreen mode
+    # -W, -H: display resolution (primary display)
+    # -r: refresh rate
+    # --: separator between gamescope and steam args
+    exec gamescope -e -f -W 1920 -H 1080 -r 60 -- steam -gamepadui
+  '';
+in
 {
+
   programs.steam = {
     enable = true;
     package = inputs.millennium.packages.${pkgs.stdenv.hostPlatform.system}.millennium-steam.override {
@@ -34,7 +50,7 @@
   };
 
   # Proton runner for non-Steam games; `umu-run` is available system-wide.
-  environment.systemPackages = [ pkgs.umu-launcher ];
+  environment.systemPackages = [ pkgs.umu-launcher steamosScript ];
 
   # WINE/Proton need far more open files than the systemd default. The
   # limits.d file covers PAM logins; DefaultLimitNOFILE covers systemd user
@@ -47,6 +63,19 @@
   environment.etc."systemd/system.conf.d/wine-proton.conf".text = ''
     [Manager]
     DefaultLimitNOFILE=1048576
+  '';
+
+  # SRMP spams its Logs dir without ever clearing/rotating. Overlay it with a
+  # small tmpfs so the endless debug/error logs never hit disk or accumulate.
+  # Create the SteamOS (Gamescope) .desktop entry
+  environment.etc."applications/steamos-gamescope.desktop".text = ''
+    [Desktop Entry]
+    Name=SteamOS (Gamescope)
+    Comment=Launch Steam Deck Gamepad UI inside Gamescope
+    Exec=${steamosScript}
+    Icon=steam
+    Type=Application
+    Categories=Game
   '';
 
   # SRMP spams its Logs dir without ever clearing/rotating. Overlay it with a
