@@ -50,7 +50,10 @@ in
   };
 
   # Proton runner for non-Steam games; `umu-run` is available system-wide.
-  environment.systemPackages = [ pkgs.umu-launcher steamosScript ];
+  environment.systemPackages = [
+    pkgs.umu-launcher
+    steamosScript
+  ];
 
   # WINE/Proton need far more open files than the systemd default. The
   # limits.d file covers PAM logins; DefaultLimitNOFILE covers systemd user
@@ -65,8 +68,6 @@ in
     DefaultLimitNOFILE=1048576
   '';
 
-  # SRMP spams its Logs dir without ever clearing/rotating. Overlay it with a
-  # small tmpfs so the endless debug/error logs never hit disk or accumulate.
   # Create the SteamOS (Gamescope) .desktop entry
   environment.etc."applications/steamos-gamescope.desktop".text = ''
     [Desktop Entry]
