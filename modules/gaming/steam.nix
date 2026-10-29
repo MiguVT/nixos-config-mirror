@@ -69,17 +69,6 @@ in
     DefaultLimitNOFILE=1048576
   '';
 
-  # Create the SteamOS (Gamescope) .desktop entry
-  environment.etc."applications/steamos-gamescope.desktop".text = ''
-    [Desktop Entry]
-    Name=SteamOS (Gamescope)
-    Comment=Launch Steam Deck Gamepad UI inside Gamescope
-    Exec=${steamosScript}
-    Icon=steam
-    Type=Application
-    Categories=Game
-  '';
-
   # SRMP spams its Logs dir without ever clearing/rotating. Overlay it with a
   # small tmpfs so the endless debug/error logs never hit disk or accumulate.
   fileSystems."/mnt/data/Games/Steam/steamapps/common/Slime Rancher/SRMP/Logs" = {
