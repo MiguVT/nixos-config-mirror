@@ -18,7 +18,7 @@ let
 in
 {
   # SteamOS (Gamescope) launcher for vicinae/KDE app menu
-  home-manager.users.miguvt.home.file."~/.local/share/applications/steamos-gamescope.desktop".text = ''
+  home-manager.users.miguvt.home.file.".local/share/applications/steamos-gamescope.desktop".text = ''
     [Desktop Entry]
     Name=SteamOS (Gamescope)
     Comment=Launch Steam Deck Gamepad UI inside Gamescope
