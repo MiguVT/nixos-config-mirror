@@ -2,14 +2,17 @@
 
 let
   steamosScript = pkgs.writeShellScriptBin "steamos-gamescope" ''
-    #!/usr/bin/env bash
-    # Close any running Steam instance so Gamescope can take over
-    pkill -f "steam" 2>/dev/null || true
-    sleep 1
+    # Close any running Steam instance so Gamescope can take over.
+    # Use exact name matching (-x) so we don't kill ourselves (steamos-gamescope contains "steam").
+    if pgrep -x steam > /dev/null 2>&1; then
+      steam -shutdown 2>/dev/null || true
+      sleep 2
+      pkill -x steam 2>/dev/null || true
+    fi
     # Launch Steam Gamepad UI inside a nested Gamescope session
     # -e: exit Gamescope when the child exits
     # -f: run in fullscreen mode
-    # -W, -H: display resolution (primary display)
+    # -W, -H: display resolution (adjust to your primary display)
     # -r: refresh rate
     # --: separator between gamescope and steam args
     exec gamescope -e -f -W 1920 -H 1080 -r 60 -- steam -gamepadui
