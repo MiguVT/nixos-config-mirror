@@ -11,11 +11,14 @@ let
     fi
     # Launch Steam Gamepad UI inside a nested Gamescope session
     # -e: exit Gamescope when the child exits
-    # -f: run in fullscreen mode (auto-detects main display resolution & refresh rate)
+    # -f: run in fullscreen mode
+    # -w, -h: internal render resolution (Steam Deck = 1280x800 @ 60Hz)
+    # -W, -H: output resolution (uncomment & set to your monitor to fill screen)
+    # -r: refresh rate (Steam Deck = 60)
     # --: separator between gamescope and steam args
-    # If auto-detect picks the wrong resolution on NVIDIA, uncomment and adjust:
-    # exec gamescope -e -f -W 1920 -H 1080 -r 165 -- steam -gamepadui
-    exec gamescope -e -f -- steam -gamepadui
+    exec gamescope -e -f -w 1280 -h 800 -r 60 -- steam -gamepadui
+    # Example for a 1080p monitor:
+    # exec gamescope -e -f -w 1280 -h 800 -W 1920 -H 1080 -r 60 -- steam -gamepadui
   '';
 in
 {
