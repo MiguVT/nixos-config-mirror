@@ -22,7 +22,7 @@ in
     [Desktop Entry]
     Name=SteamOS (Gamescope)
     Comment=Launch Steam Deck Gamepad UI inside Gamescope
-    Exec=${steamosScript}
+    Exec=${steamosScript}/bin/steamos-gamescope
     Icon=steam
     Type=Application
     Categories=Game
