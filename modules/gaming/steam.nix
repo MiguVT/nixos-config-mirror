@@ -28,7 +28,10 @@
   services.flatpak.packages = [ "ru.linux_gaming.PortProton" ];
 
   programs.gamemode.enable = true;
-  programs.gamescope.enable = true;
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
 
   # Proton runner for non-Steam games; `umu-run` is available system-wide.
   environment.systemPackages = [ pkgs.umu-launcher ];
