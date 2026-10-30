@@ -21,6 +21,7 @@
     ./modules/gaming/oversteer.nix
     ./modules/gaming/pegasus.nix
     ./modules/gaming/steam.nix
+    ./modules/gaming/sunshine.nix
     ./modules/gaming/minecraft.nix
     ./modules/gaming/index.nix # <-- WILL BE FIXED ON UPSTREAM SOON
     ./modules/gaming/roblox.nix
@@ -113,6 +114,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "uinput"
     ];
   };
 
