@@ -12,13 +12,14 @@ let
     # Launch Steam Gamepad UI inside a nested Gamescope session
     # -e: exit Gamescope when the child exits
     # -f: run in fullscreen mode
-    # -w, -h: internal render resolution (Steam Deck = 1280x800 @ 60Hz)
-    # -W, -H: output resolution (uncomment & set to your monitor to fill screen)
-    # -r: refresh rate (Steam Deck = 60)
+    # -w, -h: internal render resolution (1920x1080 for 1080p monitor @ 165Hz)
+    # -W, -H: output resolution (omit = fill monitor with integer scaling)
+    # -r: refresh rate (165 for your monitor)
     # --: separator between gamescope and steam args
-    exec gamescope -e -f -w 1280 -h 800 -r 60 -- steam -gamepadui
-    # Example for a 1080p monitor:
-    # exec gamescope -e -f -w 1280 -h 800 -W 1920 -H 1080 -r 60 -- steam -gamepadui
+    # NOTE: Autodetect does not work reliably nested under KDE on NVIDIA,
+    # so resolution is hardcoded. To go back to Steam Deck defaults, use:
+    # exec gamescope -e -f -w 1280 -h 800 -r 60 -- steam -gamepadui
+    exec gamescope -e -f -w 1920 -h 1080 -r 165 -- steam -gamepadui
   '';
 in
 {
