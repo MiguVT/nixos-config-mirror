@@ -12,12 +12,11 @@ let
     # Launch Steam Gamepad UI inside a nested Gamescope session
     # -e: exit Gamescope when the child exits
     # -f: run in fullscreen mode
-    # -w, -h: internal render resolution (1920x1080 for 1080p monitor @ 165Hz)
-    # -W, -H: output resolution (omit = fill monitor with integer scaling)
-    # -r: refresh rate (165 for your monitor)
+    # -w, -h: internal render resolution (1920x1080 @ 165Hz for my monitor)
+    # -r: refresh rate (165 Hz)
     # --: separator between gamescope and steam args
     # NOTE: Autodetect does not work reliably nested under KDE on NVIDIA,
-    # so resolution is hardcoded. To go back to Steam Deck defaults, use:
+    # so resolution is hardcoded. Steam Deck defaults would be:
     # exec gamescope -e -f -w 1280 -h 800 -r 60 -- steam -gamepadui
     exec gamescope -e -f -w 1920 -h 1080 -r 165 -- steam -gamepadui
   '';
@@ -55,6 +54,10 @@ in
     ];
 
     protontricks.enable = true;
+
+    # Official Steam Deck session option (independent of nested launcher).
+    # Enables the "Steam Deck" login session from SDDM.
+    gamescopeSession.enable = true;
   };
 
   # Proton/WINE prefix manager for Steam games (Flatpak from Flathub).
@@ -66,6 +69,7 @@ in
     capSysNice = true;
   };
 
+  # Steam controller mouse input fix from NixOS docs.
   # Proton runner for non-Steam games; `umu-run` is available system-wide.
   environment.systemPackages = [
     pkgs.umu-launcher
