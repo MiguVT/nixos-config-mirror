@@ -6,6 +6,7 @@
       vesktop
       ayugram-desktop
       whatsie
+      mumble
     ];
   };
 }
