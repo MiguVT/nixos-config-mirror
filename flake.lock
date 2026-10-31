@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "creamlinux-installer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793401197,
+        "narHash": "sha256-78NexMKBlJltCGb1qDK4B2kYNMdVAWNxgSUDnNjOJhM=",
+        "owner": "Novattz",
+        "repo": "creamlinux-installer",
+        "rev": "ff6bb7f6aab437a387c35943a363c0b8dce783b0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Novattz",
+        "repo": "creamlinux-installer",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "locked": {
         "lastModified": 1733328505,
@@ -489,6 +505,7 @@
     "root": {
       "inputs": {
         "amethyst": "amethyst",
+        "creamlinux-installer": "creamlinux-installer",
         "freesmlauncher": "freesmlauncher",
         "home-manager": "home-manager",
         "hytale-launcher-flake": "hytale-launcher-flake",

@@ -2,36 +2,49 @@
 
 let
   steamosScript = pkgs.writeShellScriptBin "steamos-gamescope" ''
-    # Close any running Steam instance so Gamescope can take over.
-    # Use exact name matching (-x) so we don't kill ourselves (steamos-gamescope contains "steam").
+    # Gracefully shut down Steam and wait up to 8 seconds before force-killing
     if pgrep -x steam > /dev/null 2>&1; then
       steam -shutdown 2>/dev/null || true
-      sleep 2
-      pkill -x steam 2>/dev/null || true
+      for i in {1..16}; do
+        if ! pgrep -x steam > /dev/null 2>&1; then
+          break
+        fi
+        sleep 0.5
+      done
+      pkill -9 -x steam 2>/dev/null || true
     fi
+
     # Launch Steam Gamepad UI inside a nested Gamescope session
-    # -e: exit Gamescope when the child exits
-    # -f: run in fullscreen mode
-    # -w, -h: internal render resolution (1920x1080 @ 165Hz for my monitor)
-    # -r: refresh rate (165 Hz)
-    # --: separator between gamescope and steam args
-    # NOTE: Autodetect does not work reliably nested under KDE on NVIDIA,
-    # so resolution is hardcoded. Steam Deck defaults would be:
-    # exec gamescope -e -f -w 1280 -h 800 -r 60 -- steam -gamepadui
-    exec gamescope -e -f -w 1920 -h 1080 -r 165 -- steam -gamepadui
+    exec gamescope \
+      --rt \
+      --backend wayland \
+      --force-grab-cursor \
+      -e \
+      -f \
+      -w 1920 -h 1080 \
+      -W 1920 -H 1080 \
+      -r 165 \
+      -- steam -gamepadui
   '';
 in
 {
   # SteamOS (Gamescope) launcher for vicinae/KDE app menu
-  home-manager.users.miguvt.home.file.".local/share/applications/steamos-gamescope.desktop".text = ''
-    [Desktop Entry]
-    Name=SteamOS (Gamescope)
-    Comment=Launch Steam Deck Gamepad UI inside Gamescope
-    Exec=${steamosScript}/bin/steamos-gamescope
-    Icon=steam
-    Type=Application
-    Categories=Game
-  '';
+  home-manager.users.miguvt.xdg.desktopEntries = {
+    steamos-gamescope = {
+      name = "SteamOS (Gamescope)";
+      comment = "Launch Steam Deck Gamepad UI inside Gamescope";
+      exec = "${steamosScript}/bin/steamos-gamescope";
+      icon = "steam";
+      categories = [ "Game" ];
+    };
+    steam-gamepadui = {
+      name = "Steam (Gamepad UI)";
+      comment = "Launch Steam Big Picture / Deck UI natively on KDE";
+      exec = "steam -gamepadui";
+      icon = "steam";
+      categories = [ "Game" ];
+    };
+  };
 
   programs.steam = {
     enable = true;
@@ -57,7 +70,22 @@ in
 
     # Official Steam Deck session option (independent of nested launcher).
     # Enables the "Steam Deck" login session from SDDM.
-    gamescopeSession.enable = true;
+    gamescopeSession = {
+      enable = true;
+      args = [
+        "-w"
+        "1920"
+        "-h"
+        "1080"
+        "-W"
+        "1920"
+        "-H"
+        "1080"
+        "-r"
+        "165"
+        "--adaptive-sync"
+      ];
+    };
   };
 
   # Proton/WINE prefix manager for Steam games (Flatpak from Flathub).
@@ -69,25 +97,31 @@ in
     capSysNice = true;
   };
 
-  # Steam controller mouse input fix from NixOS docs.
   # Proton runner for non-Steam games; `umu-run` is available system-wide.
   environment.systemPackages = [
     pkgs.umu-launcher
     steamosScript
   ];
 
-  # WINE/Proton need far more open files than the systemd default. The
-  # limits.d file covers PAM logins; DefaultLimitNOFILE covers systemd user
-  # sessions, where PAM cannot raise the hard limit above the manager's cap.
-  environment.etc."security/limits.d/99-wine-proton.conf".text = ''
-    * soft nofile 1048576
-    * hard nofile 1048576
-  '';
+  # WINE/Proton need far more open files than the systemd default.
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "1048576";
+    }
+    {
+      domain = "*";
+      type = "hard";
+      item = "nofile";
+      value = "1048576";
+    }
+  ];
 
-  environment.etc."systemd/system.conf.d/wine-proton.conf".text = ''
-    [Manager]
-    DefaultLimitNOFILE=1048576
-  '';
+  # Modern NixOS structured systemd settings
+  systemd.settings.Manager.DefaultLimitNOFILE = "1048576";
+  systemd.user.settings.Manager.DefaultLimitNOFILE = "1048576";
 
   # SRMP spams its Logs dir without ever clearing/rotating. Overlay it with a
   # small tmpfs so the endless debug/error logs never hit disk or accumulate.

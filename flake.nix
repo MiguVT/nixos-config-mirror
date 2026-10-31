@@ -24,6 +24,11 @@
 
     mocktail.url = "github:komaruworld/mocktail";
 
+    creamlinux-installer = {
+      url = "github:Novattz/creamlinux-installer";
+      flake = false;
+    };
+
     amethyst = {
       url = "github:ChrisDKN/Amethyst-Mod-Manager";
       inputs.nixpkgs.follows = "nixpkgs";
