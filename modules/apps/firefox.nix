@@ -69,7 +69,12 @@ in
             urls = [
               {
                 template = "https://searxng.miguvt.com/search";
-                params = [ { name = "q"; value = "{searchTerms}"; } ];
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
               }
             ];
             icon = "https://searxng.miguvt.com/static/favicon.svg";

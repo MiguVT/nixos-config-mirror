@@ -46,8 +46,7 @@
             meta = {
               description = "OpenCode - terminal-based AI coding agent";
               homepage = "https://github.com/anomalyco/opencode";
-              downloadPage =
-                "https://marketplace.visualstudio.com/items?itemName=sst-dev.opencode";
+              downloadPage = "https://marketplace.visualstudio.com/items?itemName=sst-dev.opencode";
               license = pkgs.lib.licenses.mit;
             };
           })
@@ -60,11 +59,9 @@
               hash = "sha256-w/NyBWMeckS/jjz5zIR6FLjfTfhfyK76+0N8l+fFy00=";
             };
             meta = {
-              description =
-                "Browse and edit Calagopus server files and access the server console directly from VS Code.";
+              description = "Browse and edit Calagopus server files and access the server console directly from VS Code.";
               homepage = "https://github.com/calagopus/vscode-extension";
-              downloadPage =
-                "https://marketplace.visualstudio.com/items?itemName=calagopus.calagopus";
+              downloadPage = "https://marketplace.visualstudio.com/items?itemName=calagopus.calagopus";
               license = pkgs.lib.licenses.mit;
             };
           })
@@ -97,6 +94,9 @@
         };
       };
     };
-    home.packages = with pkgs; [ netbeans ghidra ];
+    home.packages = with pkgs; [
+      netbeans
+      ghidra
+    ];
   };
 }
