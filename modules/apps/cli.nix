@@ -12,6 +12,7 @@
     lftp
     uv
     distrobox
+    bubblewrap
   ];
 
   environment.sessionVariables = {
