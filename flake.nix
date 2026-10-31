@@ -2,37 +2,9 @@
   description = "MiguVT's NixOS Modular Flake";
 
   inputs = {
+    # Core
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-
-    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
-
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-
-    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
-
-    vicinae.url = "github:vicinaehq/vicinae";
-
-    vicinae-extensions = {
-      url = "github:vicinaehq/extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    freesmlauncher = {
-      url = "github:FreesmTeam/FreesmLauncher?ref=develop";
-    };
-
-    mocktail.url = "github:komaruworld/mocktail";
-
-    creamlinux-installer = {
-      url = "github:Novattz/creamlinux-installer";
-      flake = false;
-    };
-
-    amethyst = {
-      url = "github:ChrisDKN/Amethyst-Mod-Manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -44,10 +16,40 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    # Desktop shell
+    vicinae.url = "github:vicinaehq/vicinae";
+
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # VR
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+
+    # Gaming
+    amethyst = {
+      url = "github:ChrisDKN/Amethyst-Mod-Manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    creamlinux-installer = {
+      url = "github:Novattz/creamlinux-installer";
+      flake = false;
+    };
+
+    freesmlauncher.url = "github:FreesmTeam/FreesmLauncher?ref=develop";
+
     hytale-launcher-flake = {
       url = "github:visoredkon/hytale-launcher-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+
+    mocktail.url = "github:komaruworld/mocktail";
   };
 
   outputs =
@@ -60,20 +62,21 @@
       sops-nix,
       ...
     }@inputs:
+    let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in
     {
-      devShells.x86_64-linux.default =
-        let
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        in
-        pkgs.mkShell {
-          packages = [
-            pkgs.nil
-            pkgs.nixfmt
-            pkgs.sops
-            pkgs.age
-            pkgs.ssh-to-age
-          ];
-        };
+      formatter.x86_64-linux = pkgs.nixfmt;
+
+      devShells.x86_64-linux.default = pkgs.mkShell {
+        packages = [
+          pkgs.nil
+          pkgs.nixfmt
+          pkgs.sops
+          pkgs.age
+          pkgs.ssh-to-age
+        ];
+      };
 
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -107,8 +110,8 @@
             home-manager.users.miguvt = {
               imports = [
                 vicinae.homeManagerModules.default
+                ./modules/home/emulators.nix
                 ./modules/home/vr.nix
-                ./modules/home/gaming.nix
               ];
               home.stateVersion = "24.11";
             };

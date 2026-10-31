@@ -6,75 +6,76 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./modules/hardware/storage.nix
-    ./modules/hardware/cpu.nix
-    ./modules/hardware/nvidia.nix
+
+    # Hardware
     ./modules/hardware/bluetooth.nix
-    ./modules/hardware/printer.nix
-    ./modules/hardware/openrgb.nix
-    ./modules/hardware/razer.nix
+    ./modules/hardware/cpu.nix
     ./modules/hardware/lg4ff.nix
-    ./modules/gaming/gale.nix
+    ./modules/hardware/nvidia.nix
+    ./modules/hardware/openrgb.nix
+    ./modules/hardware/printer.nix
+    ./modules/hardware/razer.nix
+    ./modules/hardware/storage.nix
+
+    # Gaming
     ./modules/gaming/amethyst.nix
-    ./modules/gaming/lutris.nix
-    ./modules/gaming/ludusavi.nix
-    ./modules/gaming/oversteer.nix
-    ./modules/gaming/pegasus.nix
+    ./modules/gaming/creamlinux.nix
+    ./modules/gaming/games.nix
+    ./modules/gaming/launchers.nix
+    ./modules/gaming/minecraft.nix
+    ./modules/gaming/roblox.nix
     ./modules/gaming/steam.nix
     ./modules/gaming/sunshine.nix
-    ./modules/gaming/minecraft.nix
-    ./modules/gaming/index.nix # <-- WILL BE FIXED ON UPSTREAM SOON
-    ./modules/gaming/roblox.nix
-    ./modules/gaming/hydralauncher.nix
-    ./modules/gaming/heroic.nix
-    ./modules/gaming/xbox.nix
-    ./modules/gaming/hytale-launcher.nix
-    ./modules/gaming/creamlinux.nix
+    ./modules/gaming/tools.nix
+    ./modules/gaming/valve-index.nix
     ./modules/gaming/vr.nix
-    ./modules/gaming/sm64coopdx.nix
-    ./modules/gaming/mari0.nix
-    ./modules/system/nix.nix
-    ./modules/system/nix-ld.nix
-    ./modules/system/zram.nix
-    ./modules/system/scx.nix
-    ./modules/system/sops.nix
-    ./modules/system/locale.nix
+    ./modules/gaming/xbox.nix
+
+    # System
     ./modules/system/audio.nix
-    ./modules/system/maintenance.nix
+    ./modules/system/building.nix
     ./modules/system/display.nix
-    ./modules/system/mullvad.nix
     ./modules/system/firewall.nix
     ./modules/system/forgejo.nix
-    ./modules/system/building.nix
     ./modules/system/limine.nix
-    ./modules/apps/firefox.nix
-    ./modules/apps/chromium.nix
-    ./modules/apps/terminal.nix
-    ./modules/apps/cli.nix
-    ./modules/apps/git.nix
+    ./modules/system/locale.nix
+    ./modules/system/maintenance.nix
+    ./modules/system/mullvad.nix
+    ./modules/system/nix.nix
+    ./modules/system/nix-ld.nix
+    ./modules/system/scx.nix
+    ./modules/system/sops.nix
+    ./modules/system/zram.nix
+
+    # Applications
+    ./modules/apps/ai.nix
+    ./modules/apps/alcom.nix
+    ./modules/apps/archive.nix
+    ./modules/apps/audio.nix
     ./modules/apps/bitwarden.nix
     ./modules/apps/chat.nix
-    ./modules/apps/launcher.nix
+    ./modules/apps/chromium.nix
+    ./modules/apps/cli.nix
     ./modules/apps/dev.nix
-    ./modules/apps/easyeffects.nix
-    ./modules/apps/flatpak.nix
-    ./modules/apps/ai.nix
-    ./modules/apps/streaming.nix
-    ./modules/apps/media.nix
     ./modules/apps/editor.nix
-    ./modules/apps/office.nix
-    ./modules/apps/thunderbird.nix
-    ./modules/apps/graphics.nix
-    ./modules/apps/maps.nix
-    ./modules/apps/alcom.nix
+    ./modules/apps/firefox.nix
+    ./modules/apps/flatpak.nix
     ./modules/apps/fun.nix
+    ./modules/apps/git.nix
+    ./modules/apps/graphics.nix
     ./modules/apps/isoimagewriter.nix
-    ./modules/apps/archive.nix
-    ./modules/apps/phone.nix
+    ./modules/apps/launcher.nix
+    ./modules/apps/maps.nix
+    ./modules/apps/media.nix
     ./modules/apps/monero.nix
+    ./modules/apps/office.nix
+    ./modules/apps/phone.nix
+    ./modules/apps/streaming.nix
+    ./modules/apps/terminal.nix
+    ./modules/apps/thunderbird.nix
     ./modules/apps/tor.nix
-    ./modules/apps/virt-viewer.nix
     ./modules/apps/virt-manager.nix
+    ./modules/apps/virt-viewer.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =

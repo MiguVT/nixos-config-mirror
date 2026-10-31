@@ -1,5 +1,6 @@
 { pkgs, ... }:
 
+# Workaround until the Valve Index HID reset rule ships upstream.
 let
   resetValveIndex = pkgs.writeShellScript "reset-valve-index" ''
     set -eu

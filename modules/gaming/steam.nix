@@ -1,6 +1,11 @@
 { inputs, pkgs, ... }:
 
 let
+  # Output geometry shared by the nested launcher and the Steam Deck session.
+  width = 1920;
+  height = 1080;
+  refresh = 165;
+
   steamosScript = pkgs.writeShellScriptBin "steamos-gamescope" ''
     # Gracefully shut down Steam and wait up to 8 seconds before force-killing
     if pgrep -x steam > /dev/null 2>&1; then
@@ -21,9 +26,9 @@ let
       --force-grab-cursor \
       -e \
       -f \
-      -w 1920 -h 1080 \
-      -W 1920 -H 1080 \
-      -r 165 \
+      -w ${toString width} -h ${toString height} \
+      -W ${toString width} -H ${toString height} \
+      -r ${toString refresh} \
       -- steam -gamepadui
   '';
 in
@@ -74,15 +79,15 @@ in
       enable = true;
       args = [
         "-w"
-        "1920"
+        (toString width)
         "-h"
-        "1080"
+        (toString height)
         "-W"
-        "1920"
+        (toString width)
         "-H"
-        "1080"
+        (toString height)
         "-r"
-        "165"
+        (toString refresh)
         "--adaptive-sync"
       ];
     };
