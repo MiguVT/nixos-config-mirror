@@ -11,6 +11,7 @@
     nix-output-monitor
     lftp
     uv
+    distrobox
   ];
 
   environment.sessionVariables = {
