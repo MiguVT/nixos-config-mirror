@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   # Shared between the session environment and the systemd service, which does
   # not inherit `environment.sessionVariables`.
@@ -62,20 +62,23 @@ in
         "video"
         "render"
       ];
+      # Fail closed instead of starting an unauthenticated server.
+      ExecStartPre = "${pkgs.coreutils}/bin/test -s ${config.sops.secrets."llama_key".path}";
       ExecStart = ''
         ${llamaCppCuda}/bin/llama-server \
           -hf unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL \
           --alias "qwen3.8-27b" \
           --ctx-size 65536 \
+          --image-min-tokens 1024 \
           --fit on --fit-target 768 \
           --flash-attn on \
           --cache-type-k q4_0 --cache-type-v q4_0 \
           --batch-size 4096 --ubatch-size 512 \
           --spec-type draft-mtp --spec-draft-n-max 3 --spec-draft-p-min 0.75 \
-          --no-reasoning-preserve \
-          --cache-reuse 256 \
+          --reasoning-preserve \
           --jinja \
           --parallel 1 \
+          --api-key-file ${config.sops.secrets."llama_key".path} \
           --host 0.0.0.0 --port 8001
       '';
     };
@@ -104,6 +107,8 @@ in
             "package" = "@opencode/ai/providers/openai-compatible";
             "settings" = {
               "baseURL" = "http://127.0.0.1:8001/v1";
+              # Read at runtime; the key is never copied into the Nix store.
+              "apiKey" = "{file:${config.sops.secrets."llama_key".path}}";
             };
             "models" = {
               # 1. Thinking Mode (Medium effort, Temp 1.0, Top-P 0.95)

@@ -9,4 +9,11 @@
 
   # forgejo-runner registration token (consumed by services.forgejo-runner)
   sops.secrets."forgejo_token" = { };
+
+  # llama-server API key (consumed by systemd.services.llama-server and OpenCode)
+  sops.secrets."llama_key" = {
+    owner = "miguvt";
+    mode = "0400";
+    restartUnits = [ "llama-server.service" ];
+  };
 }
