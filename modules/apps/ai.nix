@@ -44,7 +44,7 @@ in
     description = "Llama.cpp OpenAI-Compatible Server for Qwen3.8-27B";
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
+    # Not enabled: start manually with `systemctl start llama-server`.
     # The model cache lives on /mnt/data; do not start before it is mounted.
     unitConfig.RequiresMountsFor = aiModelsPath;
     # System units do not inherit `environment.sessionVariables`. llama.cpp
