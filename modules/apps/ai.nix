@@ -75,7 +75,7 @@ in
           --cache-type-k q4_0 --cache-type-v q4_0 \
           --batch-size 4096 --ubatch-size 512 \
           --spec-type draft-mtp --spec-draft-n-max 3 --spec-draft-p-min 0.75 \
-          --reasoning-preserve \
+          --no-reasoning-preserve \
           --jinja \
           --parallel 1 \
           --api-key-file ${config.sops.secrets."llama_key".path} \
