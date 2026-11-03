@@ -23,6 +23,23 @@ let
     # Test suite requires system CA certs + network access; skip in sandbox.
     doCheck = false;
   };
+
+  # Thunderbird MCP bridge — Node stdio<->HTTP proxy for the Thunderbird add-on.
+  # Upstream: https://github.com/TKasperczyk/thunderbird-mcp (no flake; no runtime deps)
+  thunderbirdMcp = pkgs.stdenvNoCC.mkDerivation rec {
+    pname = "thunderbird-mcp";
+    version = "0.10.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "TKasperczyk";
+      repo = "thunderbird-mcp";
+      rev = "v${version}";
+      hash = "sha256-FD2LIjexc8/qOlfX6fL/3/HWf0kdjx+gNug6WBW9unw=";
+    };
+    installPhase = ''
+      mkdir -p $out/lib/thunderbird-mcp
+      cp mcp-bridge.cjs package.json $out/lib/thunderbird-mcp/
+    '';
+  };
 in
 {
   environment.systemPackages = [
@@ -165,6 +182,18 @@ in
                   "presence_penalty" = 1.5;
                 };
               };
+            };
+          };
+        };
+
+        "mcp" = {
+          "servers" = {
+            "thunderbird" = {
+              "type" = "local";
+              "command" = [
+                "${pkgs.nodejs}/bin/node"
+                "${thunderbirdMcp}/lib/thunderbird-mcp/mcp-bridge.cjs"
+              ];
             };
           };
         };
