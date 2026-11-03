@@ -5,6 +5,7 @@
     onlyoffice-desktopeditors
     owncloud-client
     pandoc
+    poppler-utils
     texliveSmall
   ];
 }
