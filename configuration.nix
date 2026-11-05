@@ -11,6 +11,7 @@
     ./modules/hardware/bluetooth.nix
     ./modules/hardware/cpu.nix
     ./modules/hardware/lg4ff.nix
+    ./modules/hardware/madmouse.nix
     ./modules/hardware/nvidia.nix
     ./modules/hardware/openrgb.nix
     ./modules/hardware/printer.nix
