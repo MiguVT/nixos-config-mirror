@@ -23,6 +23,7 @@
     ./modules/gaming/creamlinux.nix
     ./modules/gaming/games.nix
     ./modules/gaming/launchers.nix
+    ./modules/gaming/macos.nix
     ./modules/gaming/minecraft.nix
     ./modules/gaming/roblox.nix
     ./modules/gaming/steam.nix

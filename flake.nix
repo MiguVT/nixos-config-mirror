@@ -30,6 +30,8 @@
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
 
     # Gaming
+    butter.url = "github:microlift/butter";
+
     amethyst = {
       url = "github:ChrisDKN/Amethyst-Mod-Manager";
       inputs.nixpkgs.follows = "nixpkgs";
