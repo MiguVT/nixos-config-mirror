@@ -51,6 +51,14 @@ in
     };
   };
 
+  # Fixed compatibility-tools entry for non-Steam launchers (e.g. BSManager),
+  # which need a Proton directory containing `proton`. Points at the Nix build
+  # so the path stays valid across GE-Proton updates and GC.
+  home-manager.users.miguvt.home.file = {
+    ".local/share/Steam/compatibilitytools.d/GE-Proton-nix".source =
+      pkgs.proton-ge-bin.steamcompattool;
+  };
+
   programs.steam = {
     enable = true;
     package = inputs.millennium.packages.${pkgs.stdenv.hostPlatform.system}.millennium-steam.override {
