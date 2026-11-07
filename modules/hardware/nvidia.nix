@@ -15,6 +15,11 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # Hide VRR/G-Sync capabilities from user space. Without this, wired VR
+  # headsets tear when a VRR-capable monitor is attached, even with VRR
+  # disabled in the compositor and the monitor's OSD.
+  boot.kernelParams = [ "nvidia-modeset.conceal_vrr_caps=1" ];
+
   hardware.nvidia = {
     modesetting.enable = true;
 
