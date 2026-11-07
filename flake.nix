@@ -30,6 +30,11 @@
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
 
     # Gaming
+    briar = {
+      url = "git+https://git.miguvt.com/MiguVT/Briar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     butter.url = "github:microlift/butter";
 
     amethyst = {

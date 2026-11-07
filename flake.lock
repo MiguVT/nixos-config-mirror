@@ -20,6 +20,26 @@
         "type": "github"
       }
     },
+    "briar": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794017747,
+        "narHash": "sha256-Kic16b1UQxQFET8SJXf/LUzoAwprc4pWuai9DCfWWYM=",
+        "ref": "refs/heads/main",
+        "rev": "2b13a5930394c00ece4698dcb3dc481ace740b21",
+        "revCount": 27,
+        "type": "git",
+        "url": "https://git.miguvt.com/MiguVT/Briar"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.miguvt.com/MiguVT/Briar"
+      }
+    },
     "butter": {
       "inputs": {
         "crane": "crane",
@@ -556,6 +576,7 @@
     "root": {
       "inputs": {
         "amethyst": "amethyst",
+        "briar": "briar",
         "butter": "butter",
         "creamlinux-installer": "creamlinux-installer",
         "freesmlauncher": "freesmlauncher",

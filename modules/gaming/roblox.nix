@@ -11,7 +11,8 @@
   ];
 
   home-manager.users.miguvt.home.packages = [
-    # Pinned via flake.lock; see inputs.mocktail in flake.nix.
+    # Pinned via flake.lock; see inputs.mocktail and inputs.briar in flake.nix.
     inputs.mocktail.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.briar.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
