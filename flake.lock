@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794059849,
-        "narHash": "sha256-lX6M3BWJ57SpRJ51k7KPAcWjvNQh/xF8IzoUMeMUZGk=",
+        "lastModified": 1794076097,
+        "narHash": "sha256-6s+U2Rdj5KYLwLfvbRpGrnzgy/aDpFOtCr12dNDDDtk=",
         "ref": "refs/heads/main",
-        "rev": "94b0ba6f48c6bbfdecd7d9d0a1276eb62541ad54",
-        "revCount": 30,
+        "rev": "f95c89a888185fab998d21a479475b0838d13d75",
+        "revCount": 31,
         "type": "git",
         "url": "https://git.miguvt.com/MiguVT/Briar"
       },
