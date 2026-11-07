@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794020567,
-        "narHash": "sha256-FB/TH1U9ZV0ExA97in1fSA80UNRhW/XZAOlaWx0JndM=",
+        "lastModified": 1794059849,
+        "narHash": "sha256-lX6M3BWJ57SpRJ51k7KPAcWjvNQh/xF8IzoUMeMUZGk=",
         "ref": "refs/heads/main",
-        "rev": "16d395e66111994c4cdfa48bc41835f3f46b89d2",
-        "revCount": 29,
+        "rev": "94b0ba6f48c6bbfdecd7d9d0a1276eb62541ad54",
+        "revCount": 30,
         "type": "git",
         "url": "https://git.miguvt.com/MiguVT/Briar"
       },
@@ -415,11 +415,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1793942556,
-        "narHash": "sha256-eClAmiRftofO/Vq19kyi37RYWLEFHf6ek17w31qE86U=",
+        "lastModified": 1794026931,
+        "narHash": "sha256-r/64yVwQsP77PQiyYWMAUrXMiVw9uhLX9EryL93+vqg=",
         "owner": "nix-community",
         "repo": "nixpkgs-xr",
-        "rev": "6ceede2f31affeea245aae14301f831eea75d683",
+        "rev": "40d27afedbdf349bd1c19c2a876185f278eaae2e",
         "type": "github"
       },
       "original": {
@@ -475,11 +475,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1793726008,
-        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
+        "lastModified": 1793876309,
+        "narHash": "sha256-Wojg9lIH/hDH91iDVH2/EPw8oDSpxjxhXONbU1yf4Zg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
+        "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
         "type": "github"
       },
       "original": {
