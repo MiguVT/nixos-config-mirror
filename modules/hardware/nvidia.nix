@@ -41,6 +41,9 @@
     powerManagement.enable = true;
     powerManagement.finegrained = false;
 
+    # Keep the driver resident: avoids the driver-load stall on first GPU use.
+    nvidiaPersistenced = true;
+
     # Open-source kernel module (stable on Ampere)
     open = true;
     nvidiaSettings = true;
