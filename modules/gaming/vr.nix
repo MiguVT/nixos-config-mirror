@@ -35,6 +35,8 @@
     # Room-boundary overlay for OpenXR; wraps the lovr engine, so keep both in the closure
     pkgs.lovr-playspace
     pkgs.lovr
+    # Power base stations on/off over Bluetooth
+    pkgs.lighthouse-steamvr
   ];
 
   # VR/RTSP compat tool for Steam (list-appends with steam.nix's extraCompatPackages)
