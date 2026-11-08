@@ -1,20 +1,5 @@
 { pkgs, ... }:
 
-let
-  # Disable idle auto-suspend on every PowerDevil profile. Idle still locks the
-  # screen (kscreenlocker defaults: Autolock=true, Timeout=5) and can turn the
-  # display off, but never sleeps. Manual sleep from the power menu still works.
-  powerdevilrc = pkgs.writeText "powerdevilrc" ''
-    [AC][SuspendAndShutdown]
-    AutoSuspendAction=0
-
-    [Battery][SuspendAndShutdown]
-    AutoSuspendAction=0
-
-    [LowBattery][SuspendAndShutdown]
-    AutoSuspendAction=0
-  '';
-in
 {
   services.xserver.enable = true; # Xwayland compatibility
   services.desktopManager.plasma6.enable = true;
@@ -101,12 +86,22 @@ in
     "d /var/lib/sddm/.config 0750 sddm sddm -"
     "R! /var/lib/sddm/.config/kwinoutputconfig.json"
     "C /var/lib/sddm/.config/kwinoutputconfig.json 0644 sddm sddm - /home/miguvt/.config/kwinoutputconfig.json"
-
-    # Keep PowerDevil's idle policy machine-wide and authoritative: reset the
-    # user's copy at boot so a stray GUI change cannot re-enable auto-suspend.
-    "R! /home/miguvt/.config/powerdevilrc"
-    "C /home/miguvt/.config/powerdevilrc 0644 miguvt users - ${powerdevilrc}"
   ];
+
+  # System-wide PowerDevil defaults: idle never auto-suspends, so the machine
+  # only locks the screen (kscreenlocker defaults: Autolock=true, Timeout=5)
+  # and may turn the display off. KConfig cascades /etc/xdg before ~/.config,
+  # so manual sleep and any explicit change made in System Settings still win.
+  environment.etc."xdg/powerdevilrc".text = ''
+    [AC][SuspendAndShutdown]
+    AutoSuspendAction=0
+
+    [Battery][SuspendAndShutdown]
+    AutoSuspendAction=0
+
+    [LowBattery][SuspendAndShutdown]
+    AutoSuspendAction=0
+  '';
 
   # Defer power/lid handling to Plasma 6 instead of systemd-logind. Plasma owns
   # the session and already handles the power/suspend/hibernate buttons; letting
