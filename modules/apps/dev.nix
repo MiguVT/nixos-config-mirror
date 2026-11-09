@@ -16,6 +16,8 @@
     mono
     msbuild
     android-tools
+    # Not in nixpkgs; see pkgs/jattach.nix
+    (callPackage ../../pkgs/jattach.nix { })
   ];
 
   environment.sessionVariables = {

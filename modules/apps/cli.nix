@@ -5,6 +5,7 @@
     tree
     wget
     curl
+    openssl
     btop
     ripgrep
     nh
