@@ -101,6 +101,28 @@
 
               # Exposes pkgs.hytale-launcher (unfree; allowed via allowUnfreePredicate)
               inputs.hytale-launcher-flake.overlays.default
+
+              # ALCOM (vrc-get), Gale, Pandora Launcher, Heroic and HydraLauncher
+              # vendor aws-lc-sys, but nixpkgs' cargo-setup-hook forces
+              # AWS_LC_SYS_USE_SYSTEM=1 (system AWS-LC), which isn't available
+              # in the sandbox. Opt out so aws-lc-sys builds from source.
+              (_final: _prev: {
+                alcom = _prev.alcom.overrideAttrs (old: {
+                  dontCargoUseSystemLibs = true;
+                });
+                gale = _prev.gale.overrideAttrs (old: {
+                  dontCargoUseSystemLibs = true;
+                });
+                pandora-launcher-unwrapped = _prev.pandora-launcher-unwrapped.overrideAttrs (old: {
+                  dontCargoUseSystemLibs = true;
+                });
+                heroic = _prev.heroic.overrideAttrs (old: {
+                  dontCargoUseSystemLibs = true;
+                });
+                hydralauncher = _prev.hydralauncher.overrideAttrs (old: {
+                  dontCargoUseSystemLibs = true;
+                });
+              })
             ];
           }
 

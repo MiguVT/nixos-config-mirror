@@ -20,6 +20,10 @@ let
     nativeBuildInputs = [ pkgs.pkg-config ];
     buildInputs = [ pkgs.openssl ];
     cargoHash = "sha256-zIyZM5IiHu95/Wmo3VSwVyF3fRIcXkCMCwsU9aRO9n4=";
+    # nixpkgs' cargo-setup-hook forces AWS_LC_SYS_USE_SYSTEM=1 (system AWS-LC),
+    # which isn't available in the sandbox. Opt out so aws-lc-sys builds from
+    # source.
+    dontCargoUseSystemLibs = true;
     # Test suite requires system CA certs + network access; skip in sandbox.
     doCheck = false;
   };
