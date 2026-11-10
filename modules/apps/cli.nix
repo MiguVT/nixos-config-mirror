@@ -14,6 +14,7 @@
     uv
     distrobox
     bubblewrap
+    mullvad-vpn
   ];
 
   environment.sessionVariables = {
