@@ -222,6 +222,9 @@ in
           "servers" = {
             "thunderbird" = {
               "type" = "local";
+              # Disabled: its tool schemas were loaded into every session while
+              # Thunderbird is usually closed. Flip to true to re-enable.
+              "enabled" = false;
               "command" = [
                 "${pkgs.nodejs}/bin/node"
                 "${thunderbirdMcp}/lib/thunderbird-mcp/mcp-bridge.cjs"
