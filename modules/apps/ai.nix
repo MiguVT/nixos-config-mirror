@@ -119,8 +119,27 @@ in
       source = (pkgs.formats.json { }).generate "opencode.json" {
         "$schema" = "https://opencode.ai/config.json";
 
-        # Default model for deep reasoning & planning
-        "model" = "local-llama/qwen3.8-27b";
+        # Default model: cheap OpenRouter GLM with 1M context and prompt caching.
+        # Local llama server stays available for offline/private work.
+        "model" = "openrouter/z-ai/glm-5.3-flash";
+
+        # Cap tool output kept in context (truncated output is still
+        # retrievable via targeted follow-up reads). Reduces paid input
+        # tokens on OpenRouter and context pressure on the local 64k model.
+        "tool_output" = {
+          "max_lines" = 600;
+          "max_bytes" = 49152;
+        };
+
+        # Explicit compaction: retains recent task state, frees ~15% of the
+        # context window before auto-compaction triggers.
+        "compaction" = {
+          "auto" = true;
+          "keep" = {
+            "tokens" = 12000;
+          };
+          "buffer" = "15%";
+        };
         # V2 equivalent of V1 `small_model`: the built-in title agent.
         "agents" = {
           "title" = {
