@@ -57,6 +57,8 @@
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 
     mocktail.url = "github:komaruworld/mocktail";
+
+    yapfast.url = "github:yapfast/yapfast";
   };
 
   outputs =

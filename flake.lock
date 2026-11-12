@@ -521,6 +521,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_8": {
+      "locked": {
+        "lastModified": 1782847189,
+        "narHash": "sha256-twXPFqFsrrY5r28Zh7Homgcp2gUMBgQ6WDS98Q/3xFI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b6018f87da91d19d0ab4cf979885689b469cdd41",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "numen": {
       "inputs": {
         "nixpkgs": [
@@ -590,7 +606,8 @@
         "nixpkgs-xr": "nixpkgs-xr",
         "sops-nix": "sops-nix",
         "vicinae": "vicinae",
-        "vicinae-extensions": "vicinae-extensions"
+        "vicinae-extensions": "vicinae-extensions",
+        "yapfast": "yapfast"
       }
     },
     "rust-overlay": {
@@ -606,6 +623,27 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "5b9f1198b59bcb31c5c3250b332e7d77590e6306",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "yapfast",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792133817,
+        "narHash": "sha256-LivT78KkZ18adR5daoXj2nlIOxuLw6B96nvW4FOl4d0=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "ec07af44be2e0ce4e1a17e00a97d44232607c1ec",
         "type": "github"
       },
       "original": {
@@ -788,6 +826,25 @@
       "original": {
         "owner": "vicinaehq",
         "repo": "vicinae",
+        "type": "github"
+      }
+    },
+    "yapfast": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_8",
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "lastModified": 1794511379,
+        "narHash": "sha256-XOyiYVDWqGqFl+UFriBWzpu37gBJnz2CLOA3Jshq1HE=",
+        "owner": "yapfast",
+        "repo": "yapfast",
+        "rev": "20fe709f245a950601b1bf37bcba68c87d655b6c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yapfast",
+        "repo": "yapfast",
         "type": "github"
       }
     }
