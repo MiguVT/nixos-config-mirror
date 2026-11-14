@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   # Monado is the default OpenXR runtime (unstable build provided by nixpkgs-xr)
@@ -6,6 +6,12 @@
     enable = true;
     defaultRuntime = true;
   };
+
+  # Don't socket-activate Monado: apps (e.g. Steam probing the VR runtime)
+  # connecting to the IPC socket would otherwise auto-start it. Start it
+  # manually with `systemctl --user start monado`.
+  systemd.user.sockets.monado.wantedBy = lib.mkForce [ ];
+  systemd.user.services.monado.wantedBy = lib.mkForce [ ];
 
   # Runtime environment for the Monado user service
   systemd.user.services.monado.environment = {
