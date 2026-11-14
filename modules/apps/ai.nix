@@ -28,15 +28,6 @@ let
     doCheck = false;
   };
 
-  # nixpkgs 2.2.5 ships a single Darwin-generated node_modules hash; upstream
-  # fixed it per platform in c399e1b7fb but nixos-unstable has not picked that
-  # up yet. Drop this override once the nixpkgs pin includes the fix.
-  opencode = pkgs.opencode.overrideAttrs (old: {
-    node_modules = old.node_modules.overrideAttrs (_: {
-      outputHash = "sha256-prx9dX7kUvs/E3zopkaPk5LXh3xJAy5sZeum/W8L7cA=";
-    });
-  });
-
   # Thunderbird MCP bridge — Node stdio<->HTTP proxy for the Thunderbird add-on.
   # Upstream: https://github.com/TKasperczyk/thunderbird-mcp (no flake; no runtime deps)
   thunderbirdMcp = pkgs.stdenvNoCC.mkDerivation rec {
@@ -57,7 +48,7 @@ in
 {
   environment.systemPackages = [
     llamaCppCuda
-    opencode
+    pkgs.opencode
     moodleMcp
   ];
 

@@ -54,7 +54,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+    # v3.6.3 adds SteamRT3 64-bit client support (PRs #949/#972), required
+    # since the Nov 2026 client update. The packages/nix sub-flake still pins
+    # millennium-src to 3.6.3-beta.1, whose CMake forces -m32 under
+    # MILLENNIUM_LINUX_X64 and breaks luajit arch detection in the sandbox —
+    # follow the v3.6.3 sources directly.
+    millennium = {
+      url = "github:SteamClientHomebrew/Millennium/v3.6.3?dir=packages/nix";
+      inputs.millennium-src.follows = "millennium-src";
+    };
+    millennium-src = {
+      url = "github:SteamClientHomebrew/Millennium/v3.6.3";
+      flake = false;
+    };
 
     mocktail.url = "github:komaruworld/mocktail";
 
@@ -103,6 +115,9 @@
 
               # Exposes pkgs.hytale-launcher (unfree; allowed via allowUnfreePredicate)
               inputs.hytale-launcher-flake.overlays.default
+
+              # Millennium (Steam client mod loader), per upstream docs
+              inputs.millennium.overlays.default
 
               # ALCOM (vrc-get), Gale, Pandora Launcher, Heroic and HydraLauncher
               # vendor aws-lc-sys, but nixpkgs' cargo-setup-hook forces
