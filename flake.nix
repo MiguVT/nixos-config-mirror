@@ -54,19 +54,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # v3.6.3 adds SteamRT3 64-bit client support (PRs #949/#972), required
-    # since the Nov 2026 client update. The packages/nix sub-flake still pins
-    # millennium-src to 3.6.3-beta.1, whose CMake forces -m32 under
-    # MILLENNIUM_LINUX_X64 and breaks luajit arch detection in the sandbox —
-    # follow the v3.6.3 sources directly.
-    millennium = {
-      url = "github:SteamClientHomebrew/Millennium/v3.6.3?dir=packages/nix";
-      inputs.millennium-src.follows = "millennium-src";
-    };
-    millennium-src = {
-      url = "github:SteamClientHomebrew/Millennium/v3.6.3";
-      flake = false;
-    };
+    # Millennium (Steam client mod loader), per upstream docs. Tracks upstream
+    # main; `nix flake update` picks up new releases.
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 
     mocktail.url = "github:komaruworld/mocktail";
 
