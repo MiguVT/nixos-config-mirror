@@ -29,6 +29,8 @@
     ./modules/gaming/steam.nix
     ./modules/gaming/sunshine.nix
     ./modules/gaming/tools.nix
+    ./modules/gaming/vrcnext.nix
+    ./modules/gaming/vrcx0.nix
     ./modules/gaming/vr.nix
     ./modules/gaming/xbox.nix
 
