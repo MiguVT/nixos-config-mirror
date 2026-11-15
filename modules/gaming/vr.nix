@@ -26,9 +26,10 @@
     XRT_COMPOSITOR_FORCE_WAYLAND_DIRECT = "1";
 
     # Use the graphics-shader layer pipeline instead of the compute squasher.
-    # The compute path corrupts colors (dark/patchy rectangles) once a
-    # multi-layer client (WayVR) forces the multi-layer path on NVIDIA;
-    # confirmed fixed with the graphics path on RTX 3090.
+    # The compute path corrupts colors (dark/patchy rectangles) when WayVR
+    # runs alongside a game on NVIDIA; confirmed fixed with the graphics
+    # path on RTX 3090. WayVR-specific (lovr-playspace overlay is clean),
+    # and not caused by WayVR's skybox layer (corrupts with skybox off).
     XRT_COMPOSITOR_COMPUTE = "0";
     U_PACING_COMP_TIME_FRACTION_PERCENT = "90";
 
