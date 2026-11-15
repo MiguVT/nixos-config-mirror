@@ -20,6 +20,7 @@
 
     # Gaming
     ./modules/gaming/amethyst.nix
+    ./modules/gaming/aurora.nix
     ./modules/gaming/creamlinux.nix
     ./modules/gaming/games.nix
     ./modules/gaming/launchers.nix
