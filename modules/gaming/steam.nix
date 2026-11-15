@@ -31,6 +31,15 @@ let
       -r ${toString refresh} \
       -- steam -gamepadui
   '';
+  # Aurora's recommended DW-Proton release; pinned separately from
+  # dwproton-bin (which tracks the latest).
+  dwproton-10 = pkgs.dwproton-bin.overrideAttrs (old: {
+    version = "dwproton-10.0-26";
+    src = pkgs.fetchzip {
+      url = "https://dawn.wine/dawn-winery/dwproton/releases/download/dwproton-10.0-26/dwproton-10.0-26-x86_64.tar.xz";
+      hash = "sha256-TkwhJCHPS0PdDIEL5GrxJPR09uO9U2DR8l9KWFLIF2g=";
+    };
+  });
 in
 {
   # SteamOS (Gamescope) launcher for vicinae/KDE app menu
@@ -59,6 +68,8 @@ in
       pkgs.proton-ge-bin.steamcompattool;
     ".local/share/Steam/compatibilitytools.d/DWProton".source =
       pkgs.dwproton-bin.steamcompattool;
+    ".local/share/Steam/compatibilitytools.d/DWProton-10.0-26".source =
+      dwproton-10.steamcompattool;
   };
 
   programs.steam = {
@@ -79,6 +90,7 @@ in
     extraCompatPackages = [
       pkgs.proton-ge-bin
       pkgs.dwproton-bin
+      dwproton-10
     ];
 
     protontricks.enable = true;
