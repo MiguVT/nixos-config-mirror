@@ -15,11 +15,11 @@ let
     # runtime; the rest of its libraries are inside the AppImage.
     extraPkgs = pkgs: with pkgs; [
       fontconfig
-      xorg.libxcb
-      xorg.xcbutilwm
-      xorg.xcbutilimage
-      xorg.xcbutilkeysyms
-      xorg.xcbutilrenderutil
+      libxcb
+      libxcb-wm
+      libxcb-image
+      libxcb-keysyms
+      libxcb-render-util
     ];
     # Desktop entry and icon come from the AppImage itself; only the Exec
     # needs patching, since the wrapper binary is lowercase "aurora".
