@@ -29,7 +29,6 @@
     ./modules/gaming/steam.nix
     ./modules/gaming/sunshine.nix
     ./modules/gaming/tools.nix
-    ./modules/gaming/valve-index.nix
     ./modules/gaming/vr.nix
     ./modules/gaming/xbox.nix
 
