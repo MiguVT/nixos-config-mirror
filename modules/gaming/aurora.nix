@@ -12,9 +12,11 @@ let
   aurora = pkgs.appimageTools.wrapType2 {
     inherit pname version src;
     # The bundled launcher binary only misses fontconfig and libxcb at
-    # runtime; the rest of its libraries are inside the AppImage.
+    # runtime; python3 is needed on PATH because the app launches games
+    # through Valve's `proton` script.
     extraPkgs = pkgs: with pkgs; [
       fontconfig
+      python3
       libxcb
       libxcb-wm
       libxcb-image
