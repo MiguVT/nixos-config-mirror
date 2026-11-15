@@ -15,6 +15,9 @@
 
   # Runtime environment for the Monado user service
   systemd.user.services.monado.environment = {
+    # Valve Index: drive the base stations through the SteamVR Lighthouse driver
+    STEAMVR_LH_ENABLE = "1";
+
     # NVIDIA: compositor work is not scheduled on time without these
     XRT_COMPOSITOR_USE_PRESENT_WAIT = "1";
 
