@@ -57,6 +57,8 @@ in
   home-manager.users.miguvt.home.file = {
     ".local/share/Steam/compatibilitytools.d/GE-Proton-nix".source =
       pkgs.proton-ge-bin.steamcompattool;
+    ".local/share/Steam/compatibilitytools.d/DWProton".source =
+      pkgs.dwproton-bin.steamcompattool;
   };
 
   programs.steam = {
