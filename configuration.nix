@@ -56,6 +56,7 @@
     ./modules/apps/alcom.nix
     ./modules/apps/archive.nix
     ./modules/apps/audio.nix
+    ./modules/apps/davinci.nix
     ./modules/apps/bitwarden.nix
     ./modules/apps/chat.nix
     ./modules/apps/chromium.nix
@@ -101,6 +102,7 @@
       "sm64coopdx"
       "baserom.us.z64"
       "cccl"
+      "davinci-resolve-studio"
       "cuda_cudart"
       "cuda_nvcc"
       "libnvvm"
