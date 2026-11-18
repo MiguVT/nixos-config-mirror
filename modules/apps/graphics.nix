@@ -14,18 +14,21 @@ let
     name = "ocr-clip";
     runtimeInputs = with pkgs; [
       kdePackages.spectacle
+      tesseract
       tesseract.languages.all
       wl-clipboard
       libnotify
     ];
     text = ''
+      # languages.all is data-only (traineddata); point tesseract at it
+      export TESSDATA_PREFIX="${pkgs.tesseract.languages.all}"
       # default covers the main languages; pass e.g. "eng+spa+fra" for more
       lang="''${1:-eng+spa}"
       tmp="$(mktemp --suffix=.png)"
       trap 'rm -f "$tmp"' EXIT
 
       # region-select screenshot, background, no notification
-      if ! spectacle -a -b -n -o "$tmp"; then
+      if ! spectacle -r -b -n -o "$tmp"; then
         exit 1
       fi
 
@@ -56,7 +59,26 @@ in
       upscayl
       ocr-clip
       ocr-clip-desktop
+      # NormCap: region-select -> OCR -> clipboard in one flow (uses its own
+      # tesseract with eng+spa by default; faster than the ocr-clip script)
+      normcap
     ];
+
+    # Autostart NormCap in tray at login: it stays resident in RAM, so the
+    # ~1-2s Python/tesseract startup happens once instead of on every capture
+    systemd.user.services.normcap-tray = {
+      Unit = {
+        Description = "NormCap OCR tray (autostart, resident)";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.normcap}/bin/normcap --background-mode";
+        Restart = "on-failure";
+        RestartSec = 2;
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
 
     # PhotoGIMP 3.1 theme profile (Diolinux/PhotoGIMP).
     # GIMP rewrites gimprc/sessionrc at runtime and cannot write through a
