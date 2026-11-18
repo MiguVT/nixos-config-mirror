@@ -64,12 +64,9 @@ in
   # which need a Proton directory containing `proton`. Points at the Nix build
   # so the path stays valid across GE-Proton updates and GC.
   home-manager.users.miguvt.home.file = {
-    ".local/share/Steam/compatibilitytools.d/GE-Proton-nix".source =
-      pkgs.proton-ge-bin.steamcompattool;
-    ".local/share/Steam/compatibilitytools.d/DWProton".source =
-      pkgs.dwproton-bin.steamcompattool;
-    ".local/share/Steam/compatibilitytools.d/DWProton-10.0-26".source =
-      dwproton-10.steamcompattool;
+    ".local/share/Steam/compatibilitytools.d/GE-Proton-nix".source = pkgs.proton-ge-bin.steamcompattool;
+    ".local/share/Steam/compatibilitytools.d/DWProton".source = pkgs.dwproton-bin.steamcompattool;
+    ".local/share/Steam/compatibilitytools.d/DWProton-10.0-26".source = dwproton-10.steamcompattool;
   };
 
   programs.steam = {
