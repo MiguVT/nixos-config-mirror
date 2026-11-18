@@ -9,6 +9,44 @@ let
     sha256 = "6b236130b8d28d84497340c3ffca2a29dd213861cb518068adae3ec6d562fe24";
   };
 
+  # Region screenshot -> OCR -> clipboard (bind to a key in Plasma shortcuts)
+  ocr-clip = pkgs.writeShellApplication {
+    name = "ocr-clip";
+    runtimeInputs = with pkgs; [
+      kdePackages.spectacle
+      tesseract.languages.all
+      wl-clipboard
+      libnotify
+    ];
+    text = ''
+      usage="usage: ocr-clip [tesseract languages] (default: eng+spa)"
+      lang="''${1:?$usage}"
+      tmp="$(mktemp --suffix=.png)"
+      trap 'rm -f "$tmp"' EXIT
+
+      # region-select screenshot, background, no notification
+      if ! spectacle -a -b -n -o "$tmp"; then
+        exit 1
+      fi
+
+      if ! text="$(tesseract "$tmp" - -l "$lang" 2>/dev/null)"; then
+        notify-send "OCR" "tesseract failed (langs: $lang)"
+        exit 1
+      fi
+      [ -n "$text" ] || { notify-send "OCR" "no text recognized"; exit 1; }
+      printf '%s' "$text" | wl-copy
+      notify-send "OCR" "copied $(printf '%s' "$text" | wc -c) bytes to clipboard"
+    '';
+  };
+
+  ocr-clip-desktop = pkgs.makeDesktopItem {
+    name = "ocr-clip";
+    desktopName = "OCR clip (Spectacle region)";
+    exec = "ocr-clip eng+spa";
+    icon = "edit-find-replace";
+    categories = [ "Utility" ];
+  };
+
 in
 
 {
@@ -16,6 +54,8 @@ in
     home.packages = with pkgs; [
       gimp-with-plugins
       upscayl
+      ocr-clip
+      ocr-clip-desktop
     ];
 
     # PhotoGIMP 3.1 theme profile (Diolinux/PhotoGIMP).
