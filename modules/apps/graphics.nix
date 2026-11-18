@@ -19,8 +19,8 @@ let
       libnotify
     ];
     text = ''
-      usage="usage: ocr-clip [tesseract languages] (default: eng+spa)"
-      lang="''${1:?$usage}"
+      # default covers the main languages; pass e.g. "eng+spa+fra" for more
+      lang="''${1:-eng+spa}"
       tmp="$(mktemp --suffix=.png)"
       trap 'rm -f "$tmp"' EXIT
 
